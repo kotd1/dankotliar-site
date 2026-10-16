@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en" data-mode="pro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dan M. Kotliar — Sociologist, University of Haifa</title>
+<meta name="description" content="Dan M. Kotliar is a sociologist at the University of Haifa studying algorithms, AI, data infrastructures and their ties to culture, politics and everyday life.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=Silkscreen&family=VT323&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   PROFESSIONAL MODE (default)
+   ========================================================= */
+:root{
+  --bg:#f7f5f0; --surface:#ffffff; --ink:#1d1d1f; --muted:#5f5f66; --line:#e3dfd6;
+  --accent:#8a1c1c; --accent-soft:#f3e7e4; --chip:#efebe3;
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius:12px; --maxw:960px;
+  /* EGA palette, used in retro mode */
+  --ega-black:#000; --ega-blue:#0000AA; --ega-green:#00AA00; --ega-cyan:#00AAAA; --ega-red:#AA0000;
+  --ega-magenta:#AA00AA; --ega-brown:#AA5500; --ega-lgray:#AAAAAA; --ega-dgray:#555555;
+  --ega-lblue:#5555FF; --ega-lgreen:#55FF55; --ega-lcyan:#55FFFF; --ega-lred:#FF5555;
+  --ega-lmagenta:#FF55FF; --ega-yellow:#FFFF55; --ega-white:#FFFFFF;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.retro{display:none}
+
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:20px;height:64px}
+.brand{font-family:var(--serif);font-weight:600;font-size:19px;color:var(--ink);text-decoration:none;white-space:nowrap}
+nav{display:flex;gap:22px;margin-left:auto;overflow-x:auto}
+nav a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;white-space:nowrap}
+nav a:hover{color:var(--ink)}
+
+.switch{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 10px 5px 6px;cursor:pointer;font:500 13px var(--sans);color:var(--muted);flex-shrink:0}
+.switch .track{width:34px;height:20px;border-radius:999px;background:var(--chip);position:relative}
+.switch .knob{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--muted);transition:transform .25s}
+.switch:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.hero{display:grid;grid-template-columns:132px 1fr;gap:32px;align-items:center;padding:64px 0 40px}
+.photo{width:132px;height:132px;border-radius:50%;overflow:hidden;background:var(--accent-soft);display:grid;place-items:center;font:600 40px var(--serif);color:var(--accent);border:1px solid var(--line)}
+.photo img,.photo canvas{width:100%;height:100%;object-fit:cover;grid-area:1/1}
+.photo canvas{display:none;image-rendering:pixelated}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,5vw,46px);line-height:1.1;margin:0 0 6px;letter-spacing:-.01em}
+.role{color:var(--muted);margin:0 0 16px;font-size:18px}
+.lede{font-size:19px;margin:0 0 18px;max-width:62ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.tags li{background:var(--chip);border-radius:999px;font-size:14px}
+.tags button{font:inherit;color:inherit;background:none;border:0;padding:4px 12px;cursor:pointer;border-radius:inherit}
+.tags li:hover{background:var(--accent-soft);color:var(--accent)}
+.tags li.on{background:var(--accent);color:#fff}
+.filterbar{background:var(--accent-soft);border-radius:var(--radius);padding:8px 14px;font-size:15px}
+.filterbar button{font:inherit;color:var(--accent);background:none;border:0;text-decoration:underline;cursor:pointer;margin-left:8px}
+.links{display:flex;gap:16px;margin-top:20px;font-size:15px;flex-wrap:wrap}
+.links a{font-weight:500}
+
+section{padding:48px 0;border-top:1px solid var(--line)}
+h2{font-family:var(--serif);font-weight:600;font-size:28px;margin:0 0 20px}
+h3{font-family:var(--serif);font-weight:600;font-size:18px;margin:28px 0 10px;color:var(--muted)}
+.pubs{list-style:none;margin:0;padding:0}
+.pubs li{padding:12px 0;border-bottom:1px solid var(--line)}
+.pubs li:last-child{border-bottom:0}
+.pubs .t{font-weight:600;color:var(--ink);text-decoration:none}
+.pubs a.t:hover{color:var(--accent)}
+.pubs .m{display:block;color:var(--muted);font-size:15px}
+details.more summary{cursor:pointer;color:var(--accent);font-weight:500;margin-top:16px}
+.courses{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.course{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.course .code{font-size:13px;color:var(--muted)}
+.course h4{font-family:var(--serif);font-size:18px;margin:4px 0 8px;line-height:1.3}
+.course .meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.course .meta span{font-size:12px;background:var(--chip);border-radius:6px;padding:2px 8px}
+.course p{margin:0;font-size:15px;color:var(--muted)}
+.updates{list-style:none;margin:0;padding:0}
+.updates li{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.updates time{color:var(--muted);font-size:14px;padding-top:2px}
+.updates li.feature{background:var(--accent-soft);border-radius:var(--radius);padding:14px 16px;border:0;margin-bottom:8px}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.contact dl{margin:0}
+.contact dt{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.contact dd{margin:0 0 14px}
+.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:10px 18px;border-radius:999px;font-weight:600;font-size:15px}
+footer{padding:32px 0 48px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+#game{display:none}
+
+/* =========================================================
+   RETRO MODE: early-PC adventure look (EGA palette, bright DOS windows)
+   ========================================================= */
+html[data-mode="retro"] .pro{display:none}
+html[data-mode="retro"] .retro{display:inline}
+html[data-mode="retro"] div.retro,html[data-mode="retro"] p.retro{display:block}
+html[data-mode="retro"]{
+  --ink:#000; --muted:#333; --line:#000; --accent:var(--ega-blue);
+  --serif:"Silkscreen","Courier New",monospace; --sans:"VT323","Courier New",monospace; --radius:0;
+}
+html[data-mode="retro"] body{font-size:22px;line-height:1.3;color:var(--ega-white);
+  background:#0000AA repeating-conic-gradient(#0000AA 0 25%,#000088 0 50%) 0 0/4px 4px}
+html[data-mode="retro"] a{color:var(--ega-blue)}
+html[data-mode="retro"] a:hover{background:var(--ega-blue);color:var(--ega-white);text-decoration:none}
+
+/* menu bar */
+html[data-mode="retro"] header{background:var(--ega-white);border-bottom:3px solid #000;backdrop-filter:none}
+html[data-mode="retro"] .bar{height:44px}
+html[data-mode="retro"] .brand{font-size:15px;color:var(--ega-magenta)}
+html[data-mode="retro"] nav a{font-size:22px;color:#000}
+html[data-mode="retro"] nav a::first-letter{color:var(--ega-red);text-decoration:underline}
+html[data-mode="retro"] nav a:hover{background:var(--ega-lcyan);color:#000}
+html[data-mode="retro"] .switch{border-radius:0;background:var(--ega-yellow);border:2px solid #000;box-shadow:3px 3px 0 #000;font:20px var(--sans);color:#000;padding:2px 10px}
+html[data-mode="retro"] .switch .track{display:none}
+
+/* hero */
+html[data-mode="retro"] .photo{border-radius:0;border:4px solid var(--ega-white);box-shadow:8px 8px 0 var(--ega-lmagenta);background:var(--ega-blue);color:var(--ega-yellow)}
+html[data-mode="retro"] .photo img{display:none}
+html[data-mode="retro"] .photo canvas{display:block;filter:contrast(1.25) saturate(1.4)}
+html[data-mode="retro"] h1{font-size:clamp(24px,4vw,36px);line-height:1.15;color:var(--ega-yellow);text-shadow:3px 3px 0 var(--ega-red)}
+html[data-mode="retro"] .role{color:var(--ega-lcyan)}
+html[data-mode="retro"] .lede{color:var(--ega-white)}
+html[data-mode="retro"] .tags li{border-radius:0;font-size:20px;color:#000;padding:0 10px;box-shadow:2px 2px 0 #000}
+html[data-mode="retro"] .tags li:nth-child(6n+1){background:var(--ega-lcyan)}
+html[data-mode="retro"] .tags li:nth-child(6n+2){background:var(--ega-lgreen)}
+html[data-mode="retro"] .tags li:nth-child(6n+3){background:var(--ega-yellow)}
+html[data-mode="retro"] .tags li:nth-child(6n+4){background:var(--ega-lmagenta)}
+html[data-mode="retro"] .tags li:nth-child(6n+5){background:var(--ega-lred)}
+html[data-mode="retro"] .tags li:nth-child(6n){background:var(--ega-white)}
+html[data-mode="retro"] .tags li:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 #000;color:#000}
+html[data-mode="retro"] .tags li.on{background:#000!important;color:var(--ega-yellow);box-shadow:2px 2px 0 var(--ega-yellow)}
+html[data-mode="retro"] .tags button{padding:0 10px}
+html[data-mode="retro"] .filterbar{background:var(--ega-yellow);border:2px solid #000;font-size:20px}
+html[data-mode="retro"] .filterbar button{color:var(--ega-blue);font-size:20px}
+html[data-mode="retro"] .links a{color:var(--ega-yellow)}
+html[data-mode="retro"] .links a:hover{background:var(--ega-yellow);color:#000}
+.prompt{color:var(--ega-lcyan);margin-top:18px}
+.prompt .cur{animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* sections become bright windows, each with its own title-bar color */
+html[data-mode="retro"] section{padding:0;margin:0 0 36px;background:var(--ega-white);color:#000;border:3px solid #000;box-shadow:8px 8px 0 #000}
+html[data-mode="retro"] section > *:not(h2){margin-left:20px;margin-right:20px}
+html[data-mode="retro"] section > :last-child{margin-bottom:20px}
+html[data-mode="retro"] h2{--bar:var(--ega-lcyan);background:var(--bar);color:#000;font:24px var(--sans);margin:0 0 16px;padding:2px 10px;display:flex;justify-content:space-between;gap:12px;border-bottom:3px solid #000}
+html[data-mode="retro"] h2::before{content:"■";color:#000}
+html[data-mode="retro"] h2 .retro{margin-right:auto}
+html[data-mode="retro"] #game h2{--bar:var(--ega-lmagenta)}
+html[data-mode="retro"] #about h2{--bar:var(--ega-lcyan)}
+html[data-mode="retro"] #writing h2{--bar:var(--ega-yellow)}
+html[data-mode="retro"] #teaching h2{--bar:var(--ega-lgreen)}
+html[data-mode="retro"] #updates h2{--bar:var(--ega-lred)}
+html[data-mode="retro"] #contact h2{--bar:var(--ega-lcyan)}
+html[data-mode="retro"] h3{font:16px var(--serif);color:var(--ega-magenta)}
+html[data-mode="retro"] .pubs li{border-bottom:1px dashed var(--ega-lgray)}
+html[data-mode="retro"] .pubs .t{color:var(--ega-blue)}
+html[data-mode="retro"] .pubs a.t:hover{color:var(--ega-white)}
+html[data-mode="retro"] .pubs .m{color:var(--ega-dgray);font-size:20px}
+html[data-mode="retro"] details.more summary{color:var(--ega-red)}
+html[data-mode="retro"] .course{background:var(--ega-blue);color:var(--ega-white);border:3px solid #000;box-shadow:5px 5px 0 var(--ega-lcyan)}
+html[data-mode="retro"] .course .code{color:var(--ega-lcyan);font-size:18px}
+html[data-mode="retro"] .course h4{font:15px/1.4 var(--serif);color:var(--ega-yellow)}
+html[data-mode="retro"] .course .meta span{border-radius:0;background:var(--ega-lgreen);color:#000;font-size:18px}
+html[data-mode="retro"] .course p{color:var(--ega-white);font-size:20px}
+html[data-mode="retro"] .updates li{border-bottom:1px dashed var(--ega-lgray)}
+html[data-mode="retro"] .updates time{color:var(--ega-magenta);font-size:20px}
+html[data-mode="retro"] .updates li.feature{background:var(--ega-yellow);border:2px solid #000}
+html[data-mode="retro"] .contact dt{color:var(--ega-magenta);font-size:18px}
+html[data-mode="retro"] .btn{border-radius:0;background:var(--ega-lgreen);color:#000;border:2px solid #000;box-shadow:4px 4px 0 #000;font:22px var(--sans);padding:4px 16px}
+html[data-mode="retro"] .btn:hover{background:var(--ega-yellow);color:#000}
+html[data-mode="retro"] footer{border:0;color:var(--ega-white);font-size:20px}
+
+/* ---------- the mini adventure ---------- */
+html[data-mode="retro"] #game{display:block}
+.stage{background:var(--ega-blue);border:3px solid #000;position:relative}
+#scene{display:block;width:100%;height:auto;image-rendering:pixelated;cursor:crosshair}
+.sentence{background:#000;color:var(--ega-lcyan);text-align:center;min-height:30px;padding:2px 8px;font-size:22px}
+.msg{background:var(--ega-blue);color:var(--ega-white);min-height:56px;padding:6px 12px;font-size:22px}
+.msg a{color:var(--ega-yellow)}
+.msg a:hover{background:var(--ega-yellow);color:#000}
+.ui{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--ega-blue);padding:4px 12px 12px}
+.verbs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.verbs button,.inv button,.restart{font:22px var(--sans);background:var(--ega-blue);color:var(--ega-lcyan);border:2px solid var(--ega-lblue);padding:2px 6px;cursor:pointer;text-align:left}
+.verbs button:hover,.inv button:hover{color:var(--ega-white);border-color:var(--ega-white)}
+.verbs button[aria-pressed="true"],.inv button[aria-pressed="true"]{color:#000;background:var(--ega-yellow);border-color:var(--ega-yellow)}
+.inv{display:flex;flex-direction:column;gap:4px;border-left:2px solid var(--ega-lblue);padding-left:12px}
+.inv .label{color:var(--ega-lgray);font-size:18px}
+.restart{background:var(--ega-white);color:var(--ega-dgray);border-color:var(--ega-lgray);font-size:18px;margin-top:10px}
+.hint{font-size:20px;color:var(--ega-dgray)}
+.gamebtns{display:flex;gap:10px;flex-wrap:wrap}
+#music[aria-pressed="true"]{background:var(--ega-lgreen);color:#000;border-color:#000}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+@media (max-width:720px){
+  .wrap{padding:0 16px}
+  .bar{height:auto!important;flex-wrap:wrap;padding:10px 0;gap:10px}
+  nav{order:3;width:100%;margin-left:0;gap:18px;padding-bottom:4px}
+  .switch{margin-left:auto}
+  .hero{grid-template-columns:1fr;gap:20px;padding:40px 0 28px}
+  .photo{width:96px;height:96px;font-size:30px}
+  .contact{grid-template-columns:1fr}
+  .updates li{grid-template-columns:1fr;gap:2px}
+  .ui{grid-template-columns:1fr}
+  .inv{border-left:0;padding-left:0}
+  html[data-mode="retro"] section > *:not(h2){margin-left:12px;margin-right:12px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top"><span class="pro">Dan M. Kotliar</span><span class="retro">KOTLIAR.EXE</span></a>
+    <nav aria-label="Sections">
+      <a href="#about">Bio</a><a href="#writing">Writing</a><a href="#teaching">Teaching</a><a href="#updates">Updates</a><a href="#contact">Contact</a>
+    </nav>
+    <button class="switch" id="modeSwitch" aria-pressed="false" title="Switch display mode">
+      <span class="track"><span class="knob"></span></span>
+      <span class="pro">Play mode</span><span class="retro">Exit game</span>
+    </button>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+
+  <div class="hero">
+    <div class="photo" id="photo">
+      <img id="photoImg" src="https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72s1IpRhGmNQqQAUj5bieK0PHQBt-1rHwdiCejX5EorAJK_hCI4AmnfV5a3Du23uDXFe12o34HNjx_mzaKM17BjmgPnCePj1oFGj0OlEGjR3WeA93wJIJ4QJ4XLwmdZhg7WHnWR7pv5C063M5Exf67Yl6OmmSDLvHuUk8sRC-VTFa8leRNWKF3k2fdcz=w400"
+           alt="Portrait of Dan M. Kotliar" onerror="this.remove();document.getElementById('photo').textContent='DK'">
+    </div>
+    <div>
+      <h1>Dan M. Kotliar</h1>
+      <p class="role">Senior Lecturer in Sociology · University of Haifa</p>
+      <p class="lede">I study the deep ties between data-driven technologies and contemporary society: how algorithms shape, and are shaped by, culture, politics and everyday life.</p>
+      <ul class="tags" aria-label="Research areas: click to see related papers">
+        <li><button data-topic="culture">Algorithms &amp; culture</button></li><li><button data-topic="ethics">AI ethics</button></li><li><button data-topic="hype">AI hype</button></li><li><button data-topic="surveillance">Surveillance</button></li><li><button data-topic="infra">Data infrastructures</button></li><li><button data-topic="science">AI-driven science</button></li>
+      </ul>
+      <div class="links">
+        <a href="mailto:dkotliar@soc.haifa.ac.il">Email</a>
+        <a href="https://bsky.app/profile/danmk.bsky.social">Bluesky</a>
+        <a href="#writing">Publications</a>
+      </div>
+      <div class="retro prompt">C:\KOTLIAR&gt; adventure.exe<span class="cur">_</span></div>
+    </div>
+  </div>
+
+  <!-- ===== Mini adventure (retro mode only) ===== -->
+  <section id="game" aria-label="A small adventure game">
+    <h2><span class="retro">ADVENTURE.EXE · Room 7014</span><span id="scoreTop">Score: 0 of 30</span></h2>
+    <p class="hint">Room 7014, University of Haifa. Reviewer 2 wants revisions. Pick a verb, then click something in the office.</p>
+    <div class="stage">
+      <canvas id="scene" width="320" height="144" aria-label="A pixel-art version of Dan's office: a tall green-framed window over wooded hills, an L-shaped wooden desk with a computer, a desk phone and a framed photo, wall shelves with a cascading pothos, a drawer unit, a trash bin and a pin board with postcards."></canvas>
+      <div class="sentence" id="sentence">Look at</div>
+      <div class="msg" id="msg" aria-live="polite">You're in your office. A revision deadline looms.</div>
+      <div class="ui">
+        <div class="verbs" id="verbs">
+          <button data-v="look" aria-pressed="true">Look at</button>
+          <button data-v="pick">Pick up</button>
+          <button data-v="use">Use</button>
+          <button data-v="open">Open</button>
+          <button data-v="talk">Talk to</button>
+          <button data-v="walk">Walk to</button>
+        </div>
+        <div class="inv" id="inv"><span class="label">Inventory</span><span class="label" id="empty">(empty)</span></div>
+      </div>
+    </div>
+    <div class="gamebtns"><button class="restart" id="music" aria-pressed="false">♪ Music: off</button><button class="restart" id="restart">Restart game</button></div>
+  </section>
+
+  <section id="about">
+    <h2><span class="pro">About</span><span class="retro">BIO.TXT</span></h2>
+    <p>I'm a senior lecturer at the Department of Sociology, the University of Haifa. My research explores the deep ties between data-driven technologies and contemporary society. Drawing on cultural sociology, science and technology studies (STS), and the sociology of knowledge, I investigate how algorithms shape—and are shaped by—culture, politics, and everyday life.</p>
+    <p>From questions of identity, power, and choice to emerging terrains such as AI ethics, AI hype, surveillance, data infrastructures, and AI-driven science, my work examines the ways data-intensive technologies transform social worlds. Together, my research projects highlight the growing influence of algorithms while offering grounded, critical perspectives on some of the most pressing challenges of our datafied age.</p>
+  </section>
+
+  <section id="writing">
+    <h2><span class="pro">Writing</span><span class="retro">WRITING.DOC</span></h2>
+    <p class="filterbar" id="filterbar" hidden>Showing papers on <b id="ftopic"></b> <button id="fclear">Show all papers</button></p>
+    <h3>2025</h3>
+    <ul class="pubs">
+      <li data-topics="hype"><a class="t" href="https://doi.org/10.1080/1369118x.2025.2531165">Can't Stop the Hype: Scrutinizing AI's Realities</a><span class="m">Kotliar · <em>Information, Communication &amp; Society</em></span></li>
+      <li data-topics="hype culture"><a class="t" href="https://doi.org/10.1177/14614448251342575">Silicon Valley Revisited: On Californian Ideologies and the Differences They Make</a><span class="m">Kotliar · <em>New Media &amp; Society</em></span></li>
+    </ul>
+    <h3>2024</h3>
+    <ul class="pubs">
+      <li data-topics="science"><a class="t" href="https://www.nature.com/articles/s41599-024-04209-5">Commodifying the Microbial Self: Microbiome-based Personalization and the Quest for Symbiotic Singularity</a><span class="m">Grosglik &amp; Kotliar · <em>Humanities and Social Sciences Communications</em></span></li>
+      <li data-topics="infra surveillance"><a class="t" href="https://doi.org/10.1080/1369118X.2024.2343816">Migrating the State into Corporate Clouds</a><span class="m">Kotliar &amp; <a href="https://alexgekker.com/">Gekker</a> · <em>Information, Communication &amp; Society</em></span></li>
+      <li data-topics="surveillance"><a class="t" href="https://doi.org/10.1080/1369118X.2023.2245873">Keeping Pegasus on the Wing: Legitimizing Cyber Espionage</a><span class="m">Kotliar &amp; <a href="https://elinorcarmi.com/">Carmi</a> · <em>Information, Communication &amp; Society</em></span></li>
+    </ul>
+    <h3>2023</h3>
+    <ul class="pubs">
+      <li data-topics="science culture"><a class="t" href="https://doi.org/10.1177/1357034X231151855">On the Contesting Conceptualisation of the Human Body: Between ‘Homo-Microbis’ and ‘Homo-Algorithmicus’</a><span class="m">Kotliar &amp; Grosglik · <em>Body &amp; Society</em> 29(3), 81–108</span></li>
+      <li data-topics="ethics"><a class="t" href="https://doi.org/10.1177/14614448221145728">Contextualizing the Ethics of Algorithms: A Socio-professional Approach</a><span class="m">Avnoon, Kotliar &amp; Rivnai-Bahir · <em>New Media &amp; Society</em> 26(10), 5962–5982</span></li>
+    </ul>
+    <details class="more">
+      <summary><span class="pro">Earlier work (2013–2022)</span><span class="retro">[+] Open ARCHIVE.ZIP</span></summary>
+      <ul class="pubs">
+        <li data-topics="culture"><span class="t">Capitalist Subjectivity, Tinder, and the Emotionalization of the Web</span><span class="m">Illouz &amp; Kotliar (2022) · In <em>Routledge Handbook of Digital Consumption</em>, pp. 229–240</span></li>
+        <li data-topics="ethics"><a class="t" href="https://www.jstor.org/stable/27083981">What We Talk About When We Talk About AI Ethics</a><span class="m">Avnoon, Kotliar &amp; Rivnai-Bahir (2021) · <em>Israeli Sociology</em> 22(2), 171–191 (Hebrew)</span></li>
+        <li data-topics="culture"><a class="t" href="https://doi.org/10.1177/0162243920925147">Who Gets to Choose? On the Socio-algorithmic Construction of Choice</a><span class="m">Kotliar (2021) · <em>Science, Technology, &amp; Human Values</em> 46(2), 346–375</span></li>
+        <li data-topics="culture"><a class="t" href="https://doi.org/10.1177/1461444820912535">The Return of the Social: Algorithmic Identity in an Age of Symbolic Demise</a><span class="m">Kotliar (2020) · <em>New Media &amp; Society</em> 22(7), 1152–1167</span></li>
+        <li data-topics="culture surveillance"><a class="t" href="https://doi.org/10.1007/s11186-020-09404-2">Data Orientalism: On the Algorithmic Construction of the Non-Western Other</a><span class="m">Kotliar (2020) · <em>Theory &amp; Society</em> 49, 919–939</span></li>
+        <li><a class="t" href="https://doi.org/10.1016/j.socscimed.2019.112524">Trauma as Badge of Honour: Holocaust Descendant Resilient Vulnerability</a><span class="m">Kidron, Kotliar &amp; Kirmayer (2019) · <em>Social Science &amp; Medicine</em> 239, 1–9</span></li>
+        <li><a class="t" href="https://doi.org/10.1007/s11133-016-9334-7">Emotional Oppositions: The Political Struggle over Citizens' Emotions</a><span class="m">Kotliar (2016) · <em>Qualitative Sociology</em> 39(3), 267–286</span></li>
+        <li><a class="t" href="https://doi.org/10.1177/1049732315612715">Depression Narratives in Blogs: A Collaborative Quest for Coherence</a><span class="m">Kotliar (2016) · <em>Qualitative Health Research</em> 26(9), 1203–1215</span></li>
+        <li><a class="t" href="https://mediaframes.sapir.ac.il/wp-content/uploads/2022/07/media_frames_11_Part3.pdf">Public Seclusion: Depression Narratives in Blogs</a><span class="m">Kotliar (2013) · <em>Misgarot Media</em> 11, 1–29 (Hebrew)</span></li>
+      </ul>
+    </details>
+  </section>
+
+  <section id="teaching">
+    <h2><span class="pro">Teaching</span><span class="retro">TEACHING.DAT</span></h2>
+    <p>Questions about course topics, attendance or anything else? <a href="mailto:dkotliar@soc.haifa.ac.il">Write to me</a>.</p>
+    <div class="courses">
+      <article class="course"><div class="code">204.3517 · BA seminar</div><h4>Technology and Emotion</h4><div class="meta"><span>Full year</span><span>2026–7</span></div>
+        <p>How dating apps turned love into a product, what happens when chatbots become companions, and how platforms profit from rage, loneliness and grief. Students develop independent qualitative projects.</p></article>
+      <article class="course"><div class="code">204.3199 · BA</div><h4>The Sociology of Algorithms</h4><div class="meta"><span>Winter</span><span>2025</span></div>
+        <p>How algorithms shape identity, communication, choice and taste; whether they reinforce inequalities; and why they are, above all, cultural artifacts.</p></article>
+      <article class="course"><div class="code">204.1019 · BA</div><h4>Qualitative Research Methods</h4><div class="meta"><span>Spring</span><span>2025–</span></div>
+        <p>Hands-on observation and in-depth interviewing: forming questions, designing a study, analyzing data, research ethics and academic writing.</p></article>
+      <article class="course"><div class="code">204.4323 · MA</div><h4>AI and Organizational Development: A Critical Sociological View</h4><div class="meta"><span>Spring</span><span>2025–</span></div>
+        <p>How algorithmic systems redefine power, responsibility, efficiency and fairness in organizations, and reshape the role of consultants and change leaders.</p></article>
+      <article class="course"><div class="code">BA</div><h4>Introduction to STS</h4><div class="meta"><span>Spring</span><span>2024</span></div>
+        <p>How facts are produced and "objectivity" constructed, how technologies embody values, applied to climate change, autonomous vehicles, genetics and more.</p></article>
+      <article class="course"><div class="code">BA</div><h4>The Politics of Knowledge</h4><div class="meta"><span>Spring</span><span>2024–2025</span></div>
+        <p>How statistics, categories and expertise shape identities, authority and inequality, and what it means to live in a "post-truth" era.</p></article>
+    </div>
+  </section>
+
+  <section id="updates">
+    <h2><span class="pro">Updates</span><span class="retro">NEWS.TXT</span></h2>
+    <ul class="updates">
+      <li class="feature"><time datetime="2026-10-26">26 Oct 2026</time>
+        <div><strong>Chronic Crisis</strong>, an international conference in sociology and anthropology we are convening in Tel Aviv, a day before the national elections, asking what happens to a society when emergency becomes routine. <a href="https://www.mind-il.org/conference/6a303484a90316da446a78bb">Program and registration</a></div></li>
+      <li><time datetime="2025-08">Aug 2025</time>
+        <div><a href="https://docs.google.com/forms/d/e/1FAIpQLSeGKzckUcbCzYzJp3pnQRKKGEQAudRc6TvVg61QVWCOOt9FFQ/viewform">An anti-war petition</a>, signed by faculty and students at the University of Haifa, published in Haaretz.</div></li>
+      <li><time datetime="2025-07">Jul 2025</time>
+        <div><a href="https://israel-sociology.org.il/wp-content/uploads/2025/08/A-Statement-by-sociologists-and-anthropologists.pdf">A statement by Israeli sociologists and anthropologists</a> regarding the war in Gaza.</div></li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2><span class="pro">Contact</span><span class="retro">CONTACT.EXE</span></h2>
+    <div class="contact">
+      <div>
+        <p>I'm always happy to be in touch. Email me or leave a message through the form, and I'll respond promptly.</p>
+        <p><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSez11PQtwOd2_UjJLlhCVG1ipt26t-5IbP6G6fzhjKzzBdhXA/viewform">Send a message</a></p>
+      </div>
+      <dl>
+        <dt>Email</dt><dd><a href="mailto:dkotliar@soc.haifa.ac.il">dkotliar@soc.haifa.ac.il</a></dd>
+        <dt>Office</dt><dd>Rabin Building, room 7014 · +972-4-824-9396</dd>
+        <dt>Office hours</dt><dd>Tuesdays &amp; Wednesdays, 10:00–12:00, by appointment</dd>
+        <dt>Elsewhere</dt><dd><a href="https://bsky.app/profile/danmk.bsky.social">Bluesky @danmk</a></dd>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex;gap:16px;flex-wrap:wrap">
+    <span>© 2026 Dan M. Kotliar</span>
+    <span class="retro"><span id="scoreFoot">Score: 0 of 30</span> · <span id="soundFoot">Sound: off</span></span>
+  </div>
+</footer>
+
+<script>
+/* ---------- mode switch ---------- */
+(function(){
+  var root=document.documentElement, btn=document.getElementById('modeSwitch');
+  function set(m){root.setAttribute('data-mode',m);btn.setAttribute('aria-pressed',m==='retro');try{localStorage.setItem('dk-mode',m)}catch(e){}}
+  try{var s=localStorage.getItem('dk-mode');if(s==='retro'||s==='pro')set(s)}catch(e){}
+  btn.addEventListener('click',function(){set(root.getAttribute('data-mode')==='retro'?'pro':'retro')});
+  // Konami code easter egg
+  var seq=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'],i=0;
+  addEventListener('keydown',function(e){i=(e.key===seq[i])?i+1:(e.key===seq[0]?1:0);if(i===seq.length){i=0;btn.click()}});
+
+  // pixelated portrait for retro mode
+  var img=document.getElementById('photoImg');
+  function pix(){if(!img||!img.naturalWidth)return;var c=document.createElement('canvas');c.width=c.height=40;
+    var w=img.naturalWidth,h=img.naturalHeight,s=Math.min(w,h);
+    c.getContext('2d').drawImage(img,(w-s)/2,(h-s)/2,s,s,0,0,40,40);img.parentNode.appendChild(c)}
+  if(img){if(img.complete)pix();else img.addEventListener('load',pix)}
+})();
+
+/* ---------- ADVENTURE.EXE: a tiny point-and-click game set in Room 7014 ---------- */
+(function(){
+  var cv=document.getElementById('scene'), ctx=cv.getContext('2d');
+  var sentenceEl=document.getElementById('sentence'), msgEl=document.getElementById('msg');
+  var invEl=document.getElementById('inv'), verbsEl=document.getElementById('verbs');
+  var VERB={look:'Look at',pick:'Pick up',use:'Use',open:'Open',talk:'Talk to',walk:'Walk to'};
+  var S, phoneLines=[
+    '"This call may be recorded for quality and training purposes."',
+    '"Hello, IT here. We\'ve noticed some unusual reading patterns."',
+    'A recorded voice offers you a loan, personalized just for you.',
+    'Just a dial tone. Even that feels monitored.'];
+
+  function reset(){
+    S={verb:'look',item:null,on:false,mug:'desk',drank:false,book:false,won:false,score:0,awarded:{},talk:0,
+       dan:{x:160,tx:160,face:1,step:0},pending:null};
+    say('You\'re in Room 7014. Sunlight, plants, and a revision deadline.');
+    setVerb('look'); renderInv(); updScore();
+  }
+  function say(t,html){html?msgEl.innerHTML=t:msgEl.textContent=t}
+  function award(k,n){if(!S.awarded[k]){S.awarded[k]=1;S.score+=n;updScore()}}
+  function updScore(){var t='Score: '+S.score+' of 30';document.getElementById('scoreTop').textContent=t;document.getElementById('scoreFoot').textContent=t}
+
+  /* ---------- static background (drawn once) ---------- */
+  var bg=document.createElement('canvas');bg.width=320;bg.height=144;
+  (function(){
+    var g=bg.getContext('2d');
+    function r(x,y,w,h,c){g.fillStyle=c;g.fillRect(x,y,w,h)}
+    var seed=7;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647}
+    // perforated ceiling + fluorescent panels
+    r(0,0,320,15,'#C8C8C4');
+    for(var y=1;y<14;y+=3)for(var x=(y%2)*1;x<320;x+=3)r(x,y,1,1,'#A4A4A0');
+    r(0,14,320,1,'#8C8C88');
+    r(150,3,112,7,'#E6E6DC');r(152,4,108,5,'#FFFFA8');for(x=154;x<258;x+=5)r(x,4,1,5,'#E8E890');
+    r(62,6,64,4,'#E6E6DC');r(63,7,62,2,'#FFFFA8');
+    // off-white walls
+    r(0,15,320,85,'#F2EFE4');r(0,15,4,85,'#DCD8CC');r(316,15,4,85,'#E4E0D4');
+    r(0,99,320,2,'#6A6A60');
+    // terrazzo floor
+    r(0,101,320,43,'#A3A391');
+    for(var i=0;i<1400;i++){var c=['#6E6E60','#C8C8B8','#85857A','#D8D8CC'][i%4];r(rnd()*320|0,101+rnd()*43|0,1,1,c)}
+    for(y=114;y<144;y+=15)r(0,y,320,1,'#8A8A7C');
+    for(x=18;x<320;x+=34)r(x,101,1,43,'#8A8A7C');
+    // window: blinds, roller shutter, green frame, view of Carmel hills
+    r(128,15,48,14,'#D8D8D0');for(y=16;y<29;y+=2)r(128,y,48,1,'#A8A8A0');
+    r(131,29,42,5,'#707070');for(y=30;y<34;y+=2)r(131,y,42,1,'#5A5A5A');
+    r(131,33,42,48,'#0B7A6A');
+    r(134,36,36,20,'#A8D8FF');r(134,36,36,6,'#8CC8FF');
+    r(134,47,36,4,'#7FA890');r(134,49,36,3,'#5E9070');
+    for(i=0;i<60;i++)r(134+rnd()*34|0,51+rnd()*5|0,3,2,['#2F8A2F','#3FA040','#256F25'][i%3]);
+    r(131,56,42,3,'#0B7A6A');
+    r(134,59,36,19,'#3A8A3A');
+    for(i=0;i<140;i++)r(134+rnd()*34|0,59+rnd()*18|0,3,2,['#2A7A2A','#55AA44','#3F9A3F','#1F661F'][i%4]);
+    r(150,36,3,20,'#0B7A6A');
+    // wall shelves (left) with metal uprights
+    r(8,18,2,64,'#9A9A96');r(50,18,2,64,'#9A9A96');
+    [30,48,66].forEach(function(sy){r(2,sy,56,3,'#B5651D');r(2,sy+3,56,1,'#7A3D00')});
+    r(16,20,18,10,'#8A4A1A');r(15,19,20,2,'#A65A22');           // pothos pot
+    r(40,41,6,7,'#E0E0D8');r(41,38,4,4,'#E0E0D8');r(41,39,1,1,'#333');r(43,39,1,1,'#333'); // figurine
+    // pin board + whiteboard (right wall)
+    r(262,28,52,56,'#9A9A96');r(264,30,48,52,'#FFFFFF');r(266,32,24,48,'#C08040');
+    var pc=['#A8D8FF','#FFFFFF','#5577AA','#D8ECFF','#FF55FF','#FFFFFF','#8CC8FF','#A8D8FF','#5577AA','#FFFFFF'];
+    for(i=0;i<10;i++){var px=268+(i%2)*11,py=34+(i>>1)*9;r(px,py,9,7,pc[i]);r(px+4,py,1,1,'#AA0000')}
+    r(295,40,3,3,'#5555FF');r(302,62,3,3,'#AA0000');r(294,78,14,2,'#333');
+    // L-shaped desk
+    r(24,80,240,4,'#B5651D');r(24,80,240,1,'#D07A2A');r(24,84,240,2,'#7A3D00');
+    r(40,86,6,36,'#151515');r(30,120,28,3,'#151515');
+    // drawer unit + bin
+    r(222,86,30,34,'#B5651D');[94,102,110].forEach(function(dy){r(222,dy,30,1,'#7A3D00')});
+    [89,97,105,113].forEach(function(dy){r(235,dy,5,1,'#222')});
+    r(224,120,3,2,'#111');r(247,120,3,2,'#111');
+    r(196,100,16,22,'#BDBDB8');r(195,99,18,2,'#9A9A96');r(197,97,14,3,'#E6E6E6');r(198,104,1,16,'#A8A8A2');
+    // office chair
+    r(124,82,20,16,'#262626');r(126,84,16,12,'#333');
+    r(116,98,32,5,'#2E2E2E');r(116,95,3,6,'#111');r(145,95,3,6,'#111');
+    r(129,103,4,11,'#111');r(114,114,34,2,'#111');r(113,116,3,2,'#000');r(129,116,3,2,'#000');r(146,116,3,2,'#000');
+    // monitor, keyboard, phone
+    r(58,56,34,20,'#141414');r(73,76,4,4,'#222');r(68,79,14,1,'#222');
+    r(62,78,32,2,'#1A1A1A');for(x=63;x<93;x+=2)r(x,78,1,1,'#3A3A3A');
+    r(28,74,14,6,'#9A9A96');r(28,72,7,3,'#7A7A76');r(29,76,3,2,'#555');
+    // framed black-and-white photo (railway tracks)
+    r(100,58,21,22,'#111');r(101,59,19,20,'#FFFFFF');
+    r(103,61,15,8,'#D8D8D8');r(103,69,15,8,'#8A8A8A');
+    g.fillStyle='#3A3A3A';g.beginPath();g.moveTo(106,77);g.lineTo(110,68);g.lineTo(111,68);g.lineTo(108,77);g.fill();
+    g.beginPath();g.moveTo(115,77);g.lineTo(111,68);g.lineTo(112,68);g.lineTo(117,77);g.fill();
+    for(y=70;y<77;y+=2)r(107+(77-y)/3|0,y,9-(77-y)/1.3|0,1,'#555');
+    r(110,64,1,4,'#111');r(110,63,1,1,'#111');
+    // window-sill plants: succulent + rosemary
+    r(176,75,7,5,'#FFFFFF');r(177,72,5,3,'#5FAA7A');r(178,71,3,1,'#7FC89A');
+    r(190,76,16,4,'#C8C8C0');for(i=0;i<14;i++)r(191+i,68+(i*5)%6,1,8-(i*5)%6,i%2?'#4F9A4F':'#6FBA5F');
+    // paper tray
+    r(214,74,26,6,'#B0B0AA');r(215,72,24,3,'#FFFFFF');r(216,70,22,2,'#F2F2F2');r(217,71,18,1,'#CCC');
+    // cascading pothos (drawn last so it hangs over shelves and desk)
+    var vines=[[20,104],[26,128],[31,96],[18,86],[34,118],[23,140]];
+    vines.forEach(function(v,k){
+      var x0=v[0],len=v[1];
+      for(var yy=26;yy<len;yy+=3){
+        var xx=x0+Math.round(Math.sin((yy+k*11)/9)*3+(yy>80?(yy-80)*0.12:0));
+        r(xx,yy,1,3,'#2F6F2F');
+        var side=((yy/3|0)%2)?1:-3;
+        r(xx+side,yy,3,2,['#00AA00','#55CC55','#1F8A1F'][(yy+k)%3]);
+      }
+    });
+    for(i=0;i<26;i++)r(12+rnd()*28|0,14+rnd()*12|0,4,3,['#00AA00','#55CC55','#1F8A1F'][i%3]);
+  })();
+
+  /* ---------- per-frame drawing ---------- */
+  function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(x,y,w,h)}
+  var t=0;
+  function draw(){
+    t++;
+    ctx.drawImage(bg,0,0);
+    // books on the lower shelf (one goes missing once taken)
+    var bc=['#AA0000','#0000AA','#AAAA00','#00AA00','#5555FF','#AA00AA','#FFFFFF'];
+    for(var b=0;b<7;b++){if(b===4&&S.book)continue;var h=10+(b*5)%5;rect(12+b*4,66-h,3,h,bc[b])}
+    // monitor screen
+    if(S.won){rect(60,58,30,16,'#00AA00');rect(63,62,22,2,'#55FF55');rect(63,67,14,2,'#55FF55')}
+    else if(S.on){rect(60,58,30,16,'#0000AA');rect(62,60,18,2,'#55FFFF');rect(62,64,24,1,'#FFFFFF');rect(62,67,20,1,'#FFFFFF');rect(62,70,22,1,'#FFFFFF');if((t>>4)%2)rect(62,72,3,1,'#55FFFF')}
+    else rect(60,58,30,16,'#1E1E2A');
+    // phone light, always blinking
+    if((t>>4)%2)rect(39,75,2,1,'#FF5555');
+    // coffee mug
+    if(S.mug==='desk'){rect(122,74,7,6,'#FFFFFF');rect(129,75,2,3,'#FFFFFF');rect(123,75,5,1,'#552A00');
+      if(!S.drank&&(t>>3)%2){rect(124,70,1,2,'#B0B0B0');rect(127,68,1,3,'#B0B0B0')}}
+    // Dan
+    var d=S.dan, moving=Math.abs(d.tx-d.x)>1;
+    if(moving){d.face=d.tx>d.x?1:-1;d.x+=d.face*2;d.step++}
+    else if(S.pending){var p=S.pending;S.pending=null;p()}
+    drawDan(d.x|0,139,moving?((d.step>>3)%2?1:-1):0,d.face);
+  }
+  var DAN=[
+    "....HHHHH.....","...HHHHHHH....","..HHhHHHHHH...","..HHHHHHHHH...","..HHSSSSSSH...",
+    "..HSSSSSESS...","..HSSSSSSSSS..","...SSSSSSSS...","...SSSSssS....","....SSSSS.....",
+    ".....sSs......","...BBWWWBB....","..BBBBWBBBB...",".BBBBBBBBBBB..",".BBBBBBBBBBB..",
+    ".BbBBBBBBBbB..",".BbBBBBBBBbB..",".BbBBBBBBBbB..",".BbBBBBBBBbB..",".BbBBBBBBBbB..",
+    ".SbBBBBBBBbS..",".S.BBBBBBB.S..","...KKKKKKK....","...PPPPPPP....","...PPPPPPP...."];
+  var PAL={H:'#5A5A5A',h:'#8A8A8A',S:'#E8A87C',s:'#C07850',E:'#000',W:'#FFFFFF',B:'#5599DD',b:'#3A70B0',K:'#151515',P:'#2A2A44',p:'#1A1A30'};
+  // Dan is drawn on a 14x40 grid of 2x2 "fat pixels" (28x80 on screen), mirrored when walking left
+  function drawDan(x,y,f,face){
+    var x0=x-14,y0=y-80;
+    function px(cx,cy,c){rect(face>0?x0+cx*2:x0+(13-cx)*2,y0+cy*2,2,2,c)}
+    ctx.fillStyle='rgba(60,60,50,.35)';ctx.fillRect(x-12,y-2,24,3);
+    for(var r=0;r<DAN.length;r++)for(var c=0;c<14;c++){var k=DAN[r][c];if(k!=='.')px(c,r,PAL[k])}
+    for(var i=0;i<13;i++){var d=Math.round(f*2*i/12);
+      for(var w=0;w<3;w++){px(3+w-d,25+i,PAL.p);px(7+w+d,25+i,PAL.P)}}
+    var dA=Math.round(f*2),dB=-dA;
+    for(w=0;w<4;w++){px(3+w+dB,38,PAL.K);px(3+w+dB,39,PAL.K);px(7+w+dA,38,PAL.K);px(7+w+dA,39,PAL.K)}
+  }
+
+  /* ---------- hotspots ---------- */
+  var spots=[
+    {id:'mug',name:'coffee mug',x:120,y:67,w:12,h:14,show:function(){return S.mug==='desk'}},
+    {id:'phone',name:'desk phone',x:26,y:70,w:18,h:11},
+    {id:'figurine',name:'figurine',x:38,y:36,w:10,h:12},
+    {id:'books',name:'books',x:10,y:52,w:32,h:14},
+    {id:'computer',name:'computer',x:56,y:54,w:38,h:27},
+    {id:'frame',name:'framed photo',x:99,y:56,w:23,h:25},
+    {id:'plants',name:'little plants',x:174,y:66,w:34,h:15},
+    {id:'papers',name:'stack of papers',x:212,y:68,w:30,h:13},
+    {id:'pothos',name:'pothos',x:2,y:14,w:48,h:16},
+    {id:'light',name:'ceiling light',x:150,y:2,w:112,h:9},
+    {id:'window',name:'window',x:128,y:15,w:48,h:65},
+    {id:'board',name:'pin board',x:262,y:26,w:52,h:58},
+    {id:'bin',name:'trash bin',x:194,y:96,w:20,h:27},
+    {id:'drawers',name:'drawers',x:220,y:85,w:34,h:38},
+    {id:'chair',name:'office chair',x:112,y:80,w:38,h:40},
+    {id:'desk',name:'desk',x:24,y:79,w:240,h:8}
+  ];
+  function hit(x,y){for(var i=0;i<spots.length;i++){var s=spots[i];if((!s.show||s.show())&&x>=s.x&&x<s.x+s.w&&y>=s.y&&y<s.y+s.h)return s}return null}
+
+  /* ---------- interaction ---------- */
+  function setVerb(v){S.verb=v;S.item=null;[].forEach.call(verbsEl.querySelectorAll('button'),function(b){b.setAttribute('aria-pressed',b.dataset.v===v)});renderInv();sentence()}
+  function sentence(target){var s=S.item?('Use '+itemName(S.item)+' with'):VERB[S.verb];sentenceEl.textContent=s+(target?' '+target:'')}
+  function itemName(k){return k==='mug'?(S.drank?'empty mug':'coffee mug'):'theory book'}
+  function renderInv(){
+    [].forEach.call(invEl.querySelectorAll('button'),function(b){b.remove()});
+    var items=[];if(S&&S.mug==='inv')items.push('mug');if(S&&S.book)items.push('book');
+    document.getElementById('empty').style.display=items.length?'none':'';
+    items.forEach(function(k){var b=document.createElement('button');b.textContent=itemName(k);
+      b.setAttribute('aria-pressed',S.item===k);b.onclick=function(){useItem(k)};invEl.appendChild(b)});
+  }
+  function useItem(k){
+    if(S.verb==='look'){say(k==='mug'?(S.drank?'An empty mug. It held up its end of the deal.':'Lukewarm coffee. Still technically coffee.'):'A dog-eared volume of social theory, heavily underlined.');return}
+    if(S.verb==='use'){
+      if(k==='mug'&&!S.drank){S.drank=true;award('drink',5);say('You drink the coffee. Your brain reaches academic operating temperature.');renderInv();return}
+      S.item=k;renderInv();sentence();return}
+    if(S.verb==='pick'){say('You already have it.');return}
+    if(S.verb==='talk'){say('Talking to your stuff. The deadline is getting to you.');return}
+    say('Nothing happens.');
+  }
+  function act(spot){
+    var id=spot.id, v=S.verb;
+    if(S.item){var it=S.item;S.item=null;renderInv();sentence();
+      if(it==='book'&&id==='computer'){
+        if(!S.on)return say('The computer is asleep. Wake it up first.');
+        if(!S.drank)return say('You stare at the theory. The theory stares back. You need coffee first.');
+        if(S.won)return say('It\'s already accepted. Don\'t tempt fate.');
+        S.won=true;award('win',10);
+        return say('You weave in the theory, cite generously and hit Submit… <b>ACCEPTED!</b> You finished the game. Your reward: <a href="#writing">the real publication list</a>.',true);
+      }
+      if(it==='mug'&&id==='computer')return say('Never mix coffee and hardware.');
+      if(it==='mug'&&(id==='pothos'||id==='plants'))return say('The plants politely decline. Coffee is for reviewers.');
+      if(it==='book'&&id==='books'){S.book=false;renderInv();return say('You put the book back. Then you remember you need it.')}
+      if(it==='book'&&id==='bin')return say('Theory is never trash. Usually.');
+      if(it==='mug'&&id==='desk'){S.mug='desk';renderInv();return say('You put the mug back on the desk.')}
+      return say('That doesn\'t work.');
+    }
+    var R={
+      look:{
+        mug:'A mug of lukewarm coffee.',
+        phone:'The office phone. Its little red light blinks. It always blinks.',
+        figurine:'A small figurine keeps watch from the shelf.',
+        books:S.book?'A gap where the theory used to be.':'A few well-thumbed books. One of them looks freshly cited.',
+        computer:S.won?'ACCEPTED. The most beautiful word in academia.':S.on?'REVISE & RESUBMIT. Reviewer 2 wants "more theory".':'The screen is dark. The computer is asleep, like most reviewers.',
+        frame:'A black-and-white photo of a lone figure walking along railway tracks.',
+        plants:'A succulent and a pot of rosemary, soaking up the sun on the sill.',
+        papers:'Peer reviews. Some you wrote, some you received. All due yesterday.',
+        pothos:'A pothos with ambitions. It is slowly colonizing the shelves, the desk and possibly the department.',
+        light:'Fluorescent. Humming at exactly the frequency of a looming deadline.',
+        window:'Green hills and treetops of Mount Carmel. Somewhere beyond them, a data center hums.',
+        board:'Postcards, and a flyer: CHRONIC CRISIS · Tel Aviv · 26.10.2026.',
+        bin:'Rejected drafts. Sorry: "early versions".',
+        drawers:'Four drawers of institutional memory.',
+        chair:'A standard-issue office chair. It has seen many deadlines.',
+        desk:'An L-shaped desk, mostly claimed by the pothos.'},
+      pick:{
+        mug:function(){S.mug='inv';award('mug',5);renderInv();return 'You take the coffee mug.'},
+        books:function(){if(S.book)return 'You already took the useful one.';S.book=true;award('book',5);renderInv();return 'You pull out a dog-eared theory book.'},
+        phone:function(){return 'You lift the receiver. '+phoneLines[0]+' You put it down.'},
+        pothos:'It has grown into the shelf. It\'s staying.',plants:'They\'re happy on the sill.',
+        figurine:'It stays where it can keep watch.',papers:'You\'ve carried enough peer reviews for one lifetime.',
+        board:'Never take down a conference flyer before the conference.',_:'You can\'t pick that up.'},
+      use:{
+        computer:function(){if(S.on)return R.look.computer;S.on=true;award('on',5);return 'The screen flickers to life: REVISE & RESUBMIT. Reviewer 2 wants "more theory".'},
+        chair:'You sit down. You stand back up. The deadline remains.',
+        light:'The switch is by the door. The lights stay on, like the deadline.',
+        phone:function(){return R.talk.phone()},window:function(){return R.open.window},
+        drawers:function(){return R.open.drawers},_:'Nothing happens.'},
+      open:{
+        window:'It opens a crack. Fresh air from the hills. Lovely, but the deadline doesn\'t care.',
+        drawers:'Old exam booklets, and a USB stick labeled "DATA, DO NOT LOSE". You close it quickly.',
+        computer:'Opening it would void the warranty.',_:'It doesn\'t open.'},
+      talk:{
+        phone:function(){var l=phoneLines[S.talk%phoneLines.length];S.talk++;return l},
+        pothos:'The pothos listens politely. It doesn\'t take notes, which is refreshing.',
+        plants:'The rosemary smells encouraging.',
+        figurine:'It says nothing, but it\'s clearly on your side.',
+        computer:'You plead with Reviewer 2. Reviewer 2 is unmoved.',_:'It doesn\'t answer.'},
+      walk:{_:''}
+    };
+    var r=R[v][id]!==undefined?R[v][id]:R[v]._;
+    if(typeof r==='function')r=r();
+    if(r)say(r,/</.test(r));
+  }
+  function toScene(e){var b=cv.getBoundingClientRect();return{x:(e.clientX-b.left)*320/b.width,y:(e.clientY-b.top)*144/b.height}}
+  cv.addEventListener('mousemove',function(e){var p=toScene(e),s=hit(p.x,p.y);sentence(s?s.name:'')});
+  cv.addEventListener('mouseleave',function(){sentence()});
+  cv.addEventListener('click',function(e){
+    var p=toScene(e),s=hit(p.x,p.y);
+    S.dan.tx=Math.max(16,Math.min(304,s?s.x+s.w/2:p.x));
+    S.pending=s?function(){act(s)}:null;
+  });
+  verbsEl.addEventListener('click',function(e){var b=e.target.closest('button');if(b)setVerb(b.dataset.v)});
+  document.getElementById('restart').onclick=reset;
+
+  ctx.imageSmoothingEnabled=false;
+  reset();
+  setInterval(function(){if(document.documentElement.getAttribute('data-mode')==='retro')draw()},1000/30);
+  draw();
+})();
+
+/* ---------- research tags filter the publication list ---------- */
+(function(){
+  var bar=document.getElementById('filterbar'),ft=document.getElementById('ftopic'),cur=null;
+  var tags=[].slice.call(document.querySelectorAll('.tags button'));
+  function apply(topic,label){
+    cur=topic;
+    [].forEach.call(document.querySelectorAll('#writing .pubs li'),function(li){
+      li.hidden=!!topic&&(' '+(li.dataset.topics||'')+' ').indexOf(' '+topic+' ')<0});
+    [].forEach.call(document.querySelectorAll('#writing .pubs'),function(ul){
+      var any=[].some.call(ul.children,function(li){return !li.hidden});ul.hidden=!any;
+      var prev=ul.previousElementSibling;if(prev&&prev.tagName==='H3')prev.hidden=!any});
+    var det=document.querySelector('#writing details');
+    if(det){var inDet=[].some.call(det.querySelectorAll('li'),function(li){return !li.hidden});det.hidden=!!topic&&!inDet;if(topic&&inDet)det.open=true}
+    bar.hidden=!topic;ft.textContent=label||'';
+    tags.forEach(function(b){b.parentNode.classList.toggle('on',b.dataset.topic===topic);b.setAttribute('aria-pressed',b.dataset.topic===topic)});
+  }
+  tags.forEach(function(b){b.addEventListener('click',function(){
+    if(cur===b.dataset.topic){apply(null);return}
+    apply(b.dataset.topic,b.textContent);
+    document.getElementById('writing').scrollIntoView({behavior:'smooth'});
+  })});
+  document.getElementById('fclear').addEventListener('click',function(){apply(null)});
+})();
+
+/* ---------- original chiptune soundtrack (Web Audio, off by default) ---------- */
+(function(){
+  var btn=document.getElementById('music'),foot=document.getElementById('soundFoot');
+  var AC,master,timer,step=0,nextT=0,playing=false,E8=60/132/2;
+  // 8 bars of eighth notes, MIDI numbers (0 = rest). Original melody in A minor.
+  var LEAD=[76,0,81,0,84,83,81,76, 77,0,81,0,84,0,81,77, 79,0,83,0,86,84,83,79, 80,0,83,0,88,0,86,83,
+            81,84,88,84,81,0,76,0, 77,81,84,81,77,0,72,0, 74,77,81,77,76,0,74,0, 76,80,83,0,76,0,0,0];
+  var ROOT=[45,41,43,40,45,41,38,40];
+  function hz(m){return 440*Math.pow(2,(m-69)/12)}
+  function tone(m,t,dur,type,vol){var o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=hz(m);
+    g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+0.02)}
+  var noise;function hat(t){var s=AC.createBufferSource(),g=AC.createGain();s.buffer=noise;g.gain.setValueAtTime(0.025,t);g.gain.exponentialRampToValueAtTime(0.0001,t+0.04);s.connect(g);g.connect(master);s.start(t);s.stop(t+0.05)}
+  function tick(){
+    if(document.documentElement.getAttribute('data-mode')!=='retro'){stop();return}
+    while(nextT<AC.currentTime+0.15){
+      var bar=step>>3,i=step%8;
+      if(LEAD[step])tone(LEAD[step],nextT,E8*0.85,'square',0.045);
+      tone(ROOT[bar]+(i%2?12:0),nextT,E8*0.9,'triangle',0.16);
+      if(i%2)hat(nextT);
+      nextT+=E8;step=(step+1)%LEAD.length;
+    }
+  }
+  function start(){
+    if(!AC){AC=new (window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=0.7;master.connect(AC.destination);
+      noise=AC.createBuffer(1,AC.sampleRate*0.05,AC.sampleRate);var d=noise.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=Math.random()*2-1}
+    AC.resume();nextT=AC.currentTime+0.05;step=0;timer=setInterval(tick,25);playing=true;ui();
+  }
+  function stop(){clearInterval(timer);playing=false;ui()}
+  function ui(){btn.textContent='♪ Music: '+(playing?'on':'off');btn.setAttribute('aria-pressed',playing);foot.textContent='Sound: '+(playing?'on':'off')}
+  btn.addEventListener('click',function(){playing?stop():start()});
+  document.addEventListener('visibilitychange',function(){if(document.hidden&&playing)stop()});
+})();
+</script>
+</body>
+</html>
