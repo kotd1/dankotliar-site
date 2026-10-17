@@ -274,7 +274,6 @@ html[data-mode="retro"] nav{margin-left:auto}
 html[data-mode="retro"] .hdrmusic{margin-left:0}
 @media (max-width:720px){html[data-mode="retro"] .hdrmusic{margin-left:auto}html[data-mode="retro"] .switch{margin-left:0}}
 
-.egg{background:var(--ega-yellow);color:#000;padding:0 6px;font-weight:700}
 
 /* portrait: soft photo normally, pixel version in game mode */
 .photo .ph-retro{display:none}
@@ -296,13 +295,6 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
   html[data-mode="retro"] .lede{margin-bottom:12px}
   .quest{font-size:18px}
 }
-/* game: footnote box */
-.left,.side{display:contents}
-.fnote{display:none;background:var(--ega-yellow);color:#000;font-size:22px;padding:6px 12px;border:2px solid #000}
-.fnote.show{display:block}
-.fnote a{color:var(--ega-blue);text-decoration:underline}
-.fnote a:hover{background:var(--ega-blue);color:#fff}
-.fnote b{color:var(--ega-magenta)}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 
@@ -362,13 +354,12 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
   <!-- ===== Mini adventure (retro mode only) ===== -->
   <section id="game" aria-label="A small adventure game">
     <h2><span class="retro">ADVENTURE.EXE · Room 7014</span><span id="scoreTop">Score: 0 of 30</span></h2>
-    <p class="quest"><b>Goal:</b> Reviewer 2 demands revisions. Get your paper accepted.<br><b>Side quest:</b> Find the 10 secret footnotes hidden around the office.</p>
+    <p class="quest"><b>Reviewer 2 demands revisions.</b> Get your paper accepted.</p>
     <div class="stage" id="stage">
-      <div class="left">
+      <div class="left" style="display:contents">
       <canvas id="scene" width="320" height="144" aria-label="A pixel-art version of Dan's office: a tall green-framed window over wooded hills, an L-shaped wooden desk with a computer, a desk phone and a framed photo, wall shelves with a cascading pothos, a drawer unit, a trash bin and a pin board with postcards."></canvas>
-        <div class="fnote" id="fnote" aria-live="polite"></div>
       </div>
-      <div class="side">
+      <div class="side" style="display:contents">
       <div class="sentence" id="sentence">Look at</div>
       <div class="msg" id="msg" aria-live="polite">Pick a verb, then click something in the office.</div>
       <div class="ui">
@@ -509,29 +500,15 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
     'A recorded voice offers you a loan, personalized just for you.',
     'Just a dial tone. Even that feels monitored.'];
 
-  // Secret footnotes: verb + object -> one of Dan's papers
-  var EGGS={
-    'talk:phone':['Keeping Pegasus on the Wing','https://www.tandfonline.com/doi/full/10.1080/1369118X.2023.2245873'],
-    'look:window':['Migrating the State into Corporate Clouds','https://www.tandfonline.com/doi/full/10.1080/1369118X.2024.2343816'],
-    'look:board':['Silicon Valley Revisited','https://journals.sagepub.com/doi/10.1177/14614448251342575'],
-    'look:light':["Can't Stop the Hype",'https://www.tandfonline.com/doi/full/10.1080/1369118X.2025.2531165'],
-    'look:figurine':['Data Orientalism','https://doi.org/10.1007/s11186-020-09404-2'],
-    'use:chair':['Who Gets to Choose?','https://doi.org/10.1177/0162243920925147'],
-    'talk:pothos':['Commodifying the Microbial Self','https://www.nature.com/articles/s41599-024-04209-5'],
-    'look:plants':['Between Homo-Microbis and Homo-Algorithmicus','https://journals.sagepub.com/doi/10.1177/1357034X231151855'],
-    'look:papers':['Contextualizing the Ethics of Algorithms','https://journals.sagepub.com/doi/10.1177/14614448221145728'],
-    'open:drawers':['The Return of the Social','https://doi.org/10.1177/1461444820912535']
-  };
-  var NEGG=Object.keys(EGGS).length;
   function reset(){
-    S={verb:'look',item:null,on:false,mug:'desk',drank:false,book:false,won:false,score:0,awarded:{},eggs:{},talk:0,
+    S={verb:'look',item:null,on:false,mug:'desk',drank:false,book:false,won:false,score:0,awarded:{},talk:0,
        dan:{x:160,tx:160,face:1,step:0},pending:null};
-    say('Pick a verb, then click something in the office.');document.getElementById('fnote').classList.remove('show');
+    say('Pick a verb, then click something in the office.');
     setVerb('look'); renderInv(); updScore();
   }
   function say(t,html){html?msgEl.innerHTML=t:msgEl.textContent=t}
   function award(k,n){if(!S.awarded[k]){S.awarded[k]=1;S.score+=n;updScore()}}
-  function updScore(){var t='Score: '+S.score+' of 30 · Footnotes: '+Object.keys(S.eggs).length+' of '+NEGG;document.getElementById('scoreTop').textContent=t;document.getElementById('scoreFoot').textContent=t}
+  function updScore(){var t='Score: '+S.score+' of 30';document.getElementById('scoreTop').textContent=t;document.getElementById('scoreFoot').textContent=t}
 
   /* ---------- static background (drawn once) ---------- */
   var bg=document.createElement('canvas');bg.width=320;bg.height=144;
@@ -762,10 +739,6 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
     };
     var r=R[v][id]!==undefined?R[v][id]:R[v]._;
     if(typeof r==='function')r=r();
-    var egg=EGGS[v+':'+id],fn=document.getElementById('fnote');
-    if(egg){var fresh=!S.eggs[v+':'+id];S.eggs[v+':'+id]=1;updScore();
-      fn.innerHTML='<b>'+(fresh?'Footnote found!':'Footnote')+'</b> <a href="'+egg[1]+'" target="_blank" rel="noopener">Read “'+egg[0]+'” ↗</a>';fn.classList.add('show')}
-    else fn.classList.remove('show');
     if(r)say(r,/</.test(r));
   }
   function toScene(e){var b=cv.getBoundingClientRect();return{x:(e.clientX-b.left)*320/b.width,y:(e.clientY-b.top)*144/b.height}}
