@@ -275,6 +275,36 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
 @media (max-width:720px){html[data-mode="retro"] .hdrmusic{margin-left:auto}html[data-mode="retro"] .switch{margin-left:0}}
 
 .egg{background:var(--ega-yellow);color:#000;padding:0 6px;font-weight:700}
+
+/* portrait: soft photo normally, pixel version in game mode */
+.photo .ph-retro{display:none}
+.photo .mono{grid-area:1/1}
+html[data-mode="retro"] .photo img.ph-pro{display:none}
+html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixelated}
+
+
+/* quest text */
+.quest{font-size:20px;color:#000;margin-bottom:10px}
+.quest p{margin:0 0 4px}
+.quest b{color:var(--ega-magenta)}
+.quest .how{color:var(--ega-dgray)}
+.gamebtns{margin:0 0 10px}
+/* full-screen game */
+.fsexit,.rotate{display:none}
+.stage.fs{position:fixed;inset:0;z-index:100;margin:0;border:0;overflow:auto;display:flex;flex-direction:column;background:var(--ega-blue)}
+.stage.fs #scene{width:100%;height:auto;flex-shrink:0}
+.stage.fs .fsexit{display:block;position:fixed;top:8px;right:8px;z-index:101;font:20px var(--sans);background:var(--ega-yellow);color:#000;border:2px solid #000;box-shadow:3px 3px 0 #000;padding:2px 10px;cursor:pointer}
+@media (orientation:portrait){.stage.fs .rotate{display:block;background:#000;color:var(--ega-yellow);text-align:center;font-size:20px;padding:6px 70px 6px 8px}}
+@media (orientation:landscape){
+  .stage.fs{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,32%);grid-template-rows:auto auto 1fr;align-items:start}
+  .stage.fs #scene{grid-column:1;grid-row:1/4;align-self:center;justify-self:center;width:min(100%,calc(100dvh*320/144));height:auto}
+  .stage.fs .sentence{grid-column:2;grid-row:1;margin-top:44px}
+  .stage.fs .msg{grid-column:2;grid-row:2;font-size:20px}
+  .stage.fs .ui{grid-column:2;grid-row:3;grid-template-columns:1fr}
+  .stage.fs .inv{border-left:0;padding-left:0}
+}
+body.fs-lock{overflow:hidden}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 
 @media (max-width:720px){
@@ -311,7 +341,7 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
 <main class="wrap" id="top">
 
   <div class="hero">
-    <div class="photo" id="photo" aria-hidden="true">DMK</div>
+    <div class="photo" id="photo"><span class="mono" aria-hidden="true">DMK</span><img class="ph-pro" src="photo.jpg" alt="Portrait of Dan M. Kotliar" onerror="this.remove()"><img class="ph-retro" src="photo-retro.png" alt="Pixel-art portrait of Dan M. Kotliar" onerror="this.remove()"></div>
     <div>
       <h1>Dan M. Kotliar</h1>
       <p class="role">Senior Lecturer in Sociology · University of Haifa</p>
@@ -333,8 +363,15 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
   <!-- ===== Mini adventure (retro mode only) ===== -->
   <section id="game" aria-label="A small adventure game">
     <h2><span class="retro">ADVENTURE.EXE · Room 7014</span><span id="scoreTop">Score: 0 of 30</span></h2>
-    <p class="hint">Room 7014, University of Haifa. Reviewer 2 wants revisions. Pick a verb, then click something in the office. Ten Easter eggs are hidden here.</p>
-    <div class="stage">
+    <div class="quest">
+      <p><b>Reviewer 2 demands revisions.</b> Your goal: get your paper accepted.</p>
+      <p><b>Side quest:</b> 10 secret footnotes are hidden around the office. Try to find them all.</p>
+      <p class="how">How to play: pick a verb, then click something in the office.</p>
+    </div>
+    <div class="gamebtns"><button class="restart" id="fsBtn" type="button">⛶ Play full screen</button><button class="restart" id="music" aria-pressed="false">♪ Music: off</button><button class="restart" id="restart">Restart game</button></div>
+    <div class="stage" id="stage">
+      <button class="fsexit" id="fsExit" type="button" aria-label="Exit full screen">✕ Exit</button>
+      <div class="rotate">Turn your phone sideways for a bigger view</div>
       <canvas id="scene" width="320" height="144" aria-label="A pixel-art version of Dan's office: a tall green-framed window over wooded hills, an L-shaped wooden desk with a computer, a desk phone and a framed photo, wall shelves with a cascading pothos, a drawer unit, a trash bin and a pin board with postcards."></canvas>
       <div class="sentence" id="sentence">Look at</div>
       <div class="msg" id="msg" aria-live="polite">You're in your office. A revision deadline looms.</div>
@@ -350,7 +387,6 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
         <div class="inv" id="inv"><span class="label">Inventory</span><span class="label" id="empty">(empty)</span></div>
       </div>
     </div>
-    <div class="gamebtns"><button class="restart" id="music" aria-pressed="false">♪ Music: off</button><button class="restart" id="restart">Restart game</button></div>
   </section>
 
   <section id="about">
@@ -475,7 +511,7 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
     'A recorded voice offers you a loan, personalized just for you.',
     'Just a dial tone. Even that feels monitored.'];
 
-  // Easter eggs: verb + object -> one of Dan's papers
+  // Secret footnotes: verb + object -> one of Dan's papers
   var EGGS={
     'talk:phone':['Keeping Pegasus on the Wing','https://www.tandfonline.com/doi/full/10.1080/1369118X.2023.2245873'],
     'look:window':['Migrating the State into Corporate Clouds','https://www.tandfonline.com/doi/full/10.1080/1369118X.2024.2343816'],
@@ -497,7 +533,7 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
   }
   function say(t,html){html?msgEl.innerHTML=t:msgEl.textContent=t}
   function award(k,n){if(!S.awarded[k]){S.awarded[k]=1;S.score+=n;updScore()}}
-  function updScore(){var t='Score: '+S.score+' of 30 · Eggs: '+Object.keys(S.eggs).length+' of '+NEGG;document.getElementById('scoreTop').textContent=t;document.getElementById('scoreFoot').textContent=t}
+  function updScore(){var t='Score: '+S.score+' of 30 · Footnotes: '+Object.keys(S.eggs).length+' of '+NEGG;document.getElementById('scoreTop').textContent=t;document.getElementById('scoreFoot').textContent=t}
 
   /* ---------- static background (drawn once) ---------- */
   var bg=document.createElement('canvas');bg.width=320;bg.height=144;
@@ -730,7 +766,7 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
     if(typeof r==='function')r=r();
     var egg=EGGS[v+':'+id];
     if(egg){var fresh=!S.eggs[v+':'+id];S.eggs[v+':'+id]=1;updScore();
-      r=(r||'')+'<br><span class="egg">'+(fresh?'Easter egg found!':'Easter egg')+'</span> <a href="'+egg[1]+'" target="_blank" rel="noopener">Read “'+egg[0]+'” ↗</a>'}
+      r=(r||'')+'<br><span class="egg">'+(fresh?'Footnote found!':'Footnote')+'</span> <a href="'+egg[1]+'" target="_blank" rel="noopener">Read “'+egg[0]+'” ↗</a>'}
     if(r)say(r,/</.test(r));
   }
   function toScene(e){var b=cv.getBoundingClientRect();return{x:(e.clientX-b.left)*320/b.width,y:(e.clientY-b.top)*144/b.height}}
@@ -844,6 +880,28 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
 
 /* ---------- show the CV button only if cv.pdf has been uploaded ---------- */
 fetch('cv.pdf',{method:'HEAD'}).then(function(r){if(r.ok)document.getElementById('cvLink').hidden=false}).catch(function(){});
+
+/* ---------- full-screen game (real full screen where supported, otherwise fills the window) ---------- */
+(function(){
+  var st=document.getElementById('stage'),btn=document.getElementById('fsBtn'),ex=document.getElementById('fsExit');
+  function lock(){try{screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(function(){})}catch(e){}}
+  function on(){
+    st.classList.add('fs');document.body.classList.add('fs-lock');
+    var rq=st.requestFullscreen||st.webkitRequestFullscreen;
+    if(rq){try{var p=rq.call(st);if(p&&p.then)p.then(lock).catch(function(){})}catch(e){}}
+  }
+  function off(){
+    st.classList.remove('fs');document.body.classList.remove('fs-lock');
+    var fe=document.fullscreenElement||document.webkitFullscreenElement;
+    if(fe){(document.exitFullscreen||document.webkitExitFullscreen).call(document)}
+    st.scrollIntoView({block:'center'});
+  }
+  btn.addEventListener('click',on);ex.addEventListener('click',off);
+  function chg(){if(!(document.fullscreenElement||document.webkitFullscreenElement)&&st.classList.contains('fs'))off()}
+  document.addEventListener('fullscreenchange',chg);document.addEventListener('webkitfullscreenchange',chg);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&st.classList.contains('fs'))off()});
+  document.getElementById('modeSwitch').addEventListener('click',function(){if(st.classList.contains('fs'))off()});
+})();
 </script>
 </body>
 </html>
