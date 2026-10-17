@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dan M. Kotliar | Sociologist, University of Haifa</title>
 <meta name="description" content="Dan M. Kotliar is a sociologist at the University of Haifa studying algorithms, AI, data infrastructures and their ties to culture, politics and everyday life.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.dankotliar.com/">
+<meta property="og:title" content="Dan M. Kotliar | Sociologist, University of Haifa">
+<meta property="og:description" content="Research on algorithms, AI, culture and surveillance. Publications, teaching, and a small adventure game.">
+<meta property="og:image" content="https://www.dankotliar.com/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Dan M. Kotliar, Sociologist, University of Haifa, next to a pixel-art version of his office.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.dankotliar.com/preview.png">
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LHS1CZT887"></script>
 <script>
@@ -242,6 +254,9 @@ html[data-mode="retro"] .pill{border-radius:0;border:2px solid #000;box-shadow:3
 html[data-mode="retro"] .links .pill:nth-child(1){background:var(--ega-lcyan)}
 html[data-mode="retro"] .links .pill:nth-child(2){background:var(--ega-lmagenta)}
 html[data-mode="retro"] .links .pill:nth-child(3){background:var(--ega-yellow)}
+html[data-mode="retro"] .links .pill:nth-child(4){background:var(--ega-lgreen)}
+html[data-mode="retro"] .links .pill:nth-child(5){background:var(--ega-white)}
+.pill[hidden]{display:none!important}
 html[data-mode="retro"] .links .pill:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #000;color:#000}
 html[data-mode="retro"] .ccard{border-radius:0;background:var(--ega-blue);color:var(--ega-white);border:3px solid #000;box-shadow:5px 5px 0 var(--ega-lcyan)}
 html[data-mode="retro"] .ccard svg{color:var(--ega-yellow)}
@@ -259,6 +274,7 @@ html[data-mode="retro"] nav{margin-left:auto}
 html[data-mode="retro"] .hdrmusic{margin-left:0}
 @media (max-width:720px){html[data-mode="retro"] .hdrmusic{margin-left:auto}html[data-mode="retro"] .switch{margin-left:0}}
 
+.egg{background:var(--ega-yellow);color:#000;padding:0 6px;font-weight:700}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 
 @media (max-width:720px){
@@ -307,6 +323,8 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
         <a class="pill" href="mailto:dkotliar@soc.haifa.ac.il" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Email</span></a>
         <a class="pill" href="https://bsky.app/profile/danmk.bsky.social" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Bluesky</span></a>
         <a class="pill" href="#writing"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 12h8M9 16h8" stroke="currentColor" stroke-width="2"/></svg><span>Publications</span></a>
+        <a class="pill" href="https://orcid.org/0000-0001-7028-1678" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="11" r="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5.5 16c.8-1.6 1.8-2.2 3-2.2s2.2.6 3 2.2M14 10h4M14 14h4" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>ORCID</span></a>
+        <a class="pill" id="cvLink" href="cv.pdf" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>CV</span></a>
       </div>
       <div class="retro prompt">C:\KOTLIAR&gt; adventure.exe<span class="cur">_</span></div>
     </div>
@@ -315,7 +333,7 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
   <!-- ===== Mini adventure (retro mode only) ===== -->
   <section id="game" aria-label="A small adventure game">
     <h2><span class="retro">ADVENTURE.EXE · Room 7014</span><span id="scoreTop">Score: 0 of 30</span></h2>
-    <p class="hint">Room 7014, University of Haifa. Reviewer 2 wants revisions. Pick a verb, then click something in the office.</p>
+    <p class="hint">Room 7014, University of Haifa. Reviewer 2 wants revisions. Pick a verb, then click something in the office. Ten Easter eggs are hidden here.</p>
     <div class="stage">
       <canvas id="scene" width="320" height="144" aria-label="A pixel-art version of Dan's office: a tall green-framed window over wooded hills, an L-shaped wooden desk with a computer, a desk phone and a framed photo, wall shelves with a cascading pothos, a drawer unit, a trash bin and a pin board with postcards."></canvas>
       <div class="sentence" id="sentence">Look at</div>
@@ -457,15 +475,29 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
     'A recorded voice offers you a loan, personalized just for you.',
     'Just a dial tone. Even that feels monitored.'];
 
+  // Easter eggs: verb + object -> one of Dan's papers
+  var EGGS={
+    'talk:phone':['Keeping Pegasus on the Wing','https://www.tandfonline.com/doi/full/10.1080/1369118X.2023.2245873'],
+    'look:window':['Migrating the State into Corporate Clouds','https://www.tandfonline.com/doi/full/10.1080/1369118X.2024.2343816'],
+    'look:board':['Silicon Valley Revisited','https://journals.sagepub.com/doi/10.1177/14614448251342575'],
+    'look:light':["Can't Stop the Hype",'https://www.tandfonline.com/doi/full/10.1080/1369118X.2025.2531165'],
+    'look:figurine':['Data Orientalism','https://doi.org/10.1007/s11186-020-09404-2'],
+    'use:chair':['Who Gets to Choose?','https://doi.org/10.1177/0162243920925147'],
+    'talk:pothos':['Commodifying the Microbial Self','https://www.nature.com/articles/s41599-024-04209-5'],
+    'look:plants':['Between Homo-Microbis and Homo-Algorithmicus','https://journals.sagepub.com/doi/10.1177/1357034X231151855'],
+    'look:papers':['Contextualizing the Ethics of Algorithms','https://journals.sagepub.com/doi/10.1177/14614448221145728'],
+    'open:drawers':['The Return of the Social','https://doi.org/10.1177/1461444820912535']
+  };
+  var NEGG=Object.keys(EGGS).length;
   function reset(){
-    S={verb:'look',item:null,on:false,mug:'desk',drank:false,book:false,won:false,score:0,awarded:{},talk:0,
+    S={verb:'look',item:null,on:false,mug:'desk',drank:false,book:false,won:false,score:0,awarded:{},eggs:{},talk:0,
        dan:{x:160,tx:160,face:1,step:0},pending:null};
     say('You\'re in Room 7014. Sunlight, plants, and a revision deadline.');
     setVerb('look'); renderInv(); updScore();
   }
   function say(t,html){html?msgEl.innerHTML=t:msgEl.textContent=t}
   function award(k,n){if(!S.awarded[k]){S.awarded[k]=1;S.score+=n;updScore()}}
-  function updScore(){var t='Score: '+S.score+' of 30';document.getElementById('scoreTop').textContent=t;document.getElementById('scoreFoot').textContent=t}
+  function updScore(){var t='Score: '+S.score+' of 30 · Eggs: '+Object.keys(S.eggs).length+' of '+NEGG;document.getElementById('scoreTop').textContent=t;document.getElementById('scoreFoot').textContent=t}
 
   /* ---------- static background (drawn once) ---------- */
   var bg=document.createElement('canvas');bg.width=320;bg.height=144;
@@ -655,16 +687,16 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
       look:{
         mug:'A mug of lukewarm coffee.',
         phone:'The office phone. Its little red light blinks. It always blinks.',
-        figurine:'A small figurine keeps watch from the shelf.',
+        figurine:'A small figurine keeps watch from the shelf. Its gaze feels strangely algorithmic.',
         books:S.book?'A gap where the theory used to be.':'A few well-thumbed books. One of them looks freshly cited.',
         computer:S.won?'ACCEPTED. The most beautiful word in academia.':S.on?'REVISE & RESUBMIT. Reviewer 2 wants "more theory".':'The screen is dark. The computer is asleep, like most reviewers.',
         frame:'A black-and-white photo of a lone figure walking along railway tracks.',
-        plants:'A succulent and a pot of rosemary, soaking up the sun on the sill.',
-        papers:'Peer reviews. Some you wrote, some you received. All due yesterday.',
+        plants:'A succulent and a pot of rosemary. Each one is really a whole microbial community.',
+        papers:'Peer reviews, all due yesterday. One reviewer asks, again, about the ethics of it all.',
         pothos:'A pothos with ambitions. It is slowly colonizing the shelves, the desk and possibly the department.',
-        light:'Fluorescent. Humming at exactly the frequency of a looming deadline.',
-        window:'Green hills and treetops of Mount Carmel. Somewhere beyond them, a data center hums.',
-        board:'Postcards, and a flyer: CHRONIC CRISIS · Tel Aviv · 26.10.2026.',
+        light:'Fluorescent, buzzing, and a little overhyped.',
+        window:'Green hills of Mount Carmel and a few passing clouds. Some clouds, you know, hold an entire state.',
+        board:'Postcards, including one that says "Greetings from Silicon Valley", and a flyer: CHRONIC CRISIS · Tel Aviv · 26.10.2026.',
         bin:'Rejected drafts. Sorry: "early versions".',
         drawers:'Four drawers of institutional memory.',
         chair:'A standard-issue office chair. It has seen many deadlines.',
@@ -678,17 +710,17 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
         board:'Never take down a conference flyer before the conference.',_:'You can\'t pick that up.'},
       use:{
         computer:function(){if(S.on)return R.look.computer;S.on=true;award('on',5);return 'The screen flickers to life: REVISE & RESUBMIT. Reviewer 2 wants "more theory".'},
-        chair:'You sit down. You stand back up. The deadline remains.',
+        chair:'Sit or stand? You hesitate. Who gets to choose?',
         light:'The switch is by the door. The lights stay on, like the deadline.',
         phone:function(){return R.talk.phone()},window:function(){return R.open.window},
         drawers:function(){return R.open.drawers},_:'Nothing happens.'},
       open:{
         window:'It opens a crack. Fresh air from the hills. Lovely, but the deadline doesn\'t care.',
-        drawers:'Old exam booklets, and a USB stick labeled "DATA, DO NOT LOSE". You close it quickly.',
+        drawers:'Old printouts of user clusters, each with a human name scribbled on it. You close it quickly.',
         computer:'Opening it would void the warranty.',_:'It doesn\'t open.'},
       talk:{
         phone:function(){var l=phoneLines[S.talk%phoneLines.length];S.talk++;return l},
-        pothos:'The pothos listens politely. It doesn\'t take notes, which is refreshing.',
+        pothos:'The pothos listens politely. So do the billions of microbes in its soil.',
         plants:'The rosemary smells encouraging.',
         figurine:'It says nothing, but it\'s clearly on your side.',
         computer:'You plead with Reviewer 2. Reviewer 2 is unmoved.',_:'It doesn\'t answer.'},
@@ -696,6 +728,9 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
     };
     var r=R[v][id]!==undefined?R[v][id]:R[v]._;
     if(typeof r==='function')r=r();
+    var egg=EGGS[v+':'+id];
+    if(egg){var fresh=!S.eggs[v+':'+id];S.eggs[v+':'+id]=1;updScore();
+      r=(r||'')+'<br><span class="egg">'+(fresh?'Easter egg found!':'Easter egg')+'</span> <a href="'+egg[1]+'" target="_blank" rel="noopener">Read “'+egg[0]+'” ↗</a>'}
     if(r)say(r,/</.test(r));
   }
   function toScene(e){var b=cv.getBoundingClientRect();return{x:(e.clientX-b.left)*320/b.width,y:(e.clientY-b.top)*144/b.height}}
@@ -806,6 +841,9 @@ html[data-mode="retro"] .hdrmusic{margin-left:0}
     });
   });
 })();
+
+/* ---------- show the CV button only if cv.pdf has been uploaded ---------- */
+fetch('cv.pdf',{method:'HEAD'}).then(function(r){if(r.ok)document.getElementById('cvLink').hidden=false}).catch(function(){});
 </script>
 </body>
 </html>
