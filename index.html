@@ -290,17 +290,19 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
 .quest .how{color:var(--ega-dgray)}
 .gamebtns{margin:0 0 10px}
 /* full-screen game */
-.fsexit,.rotate{display:none}
+.fsexit,.rotate,.hud{display:none}
+.stage.fs .hud{display:block;background:var(--ega-lmagenta);color:#000;font-size:20px;padding:4px 90px 4px 10px;border-bottom:2px solid #000}
 .stage.fs{position:fixed;inset:0;z-index:100;margin:0;border:0;overflow:auto;display:flex;flex-direction:column;background:var(--ega-blue)}
 .stage.fs #scene{width:100%;height:auto;flex-shrink:0}
 .stage.fs .fsexit{display:block;position:fixed;top:8px;right:8px;z-index:101;font:20px var(--sans);background:var(--ega-yellow);color:#000;border:2px solid #000;box-shadow:3px 3px 0 #000;padding:2px 10px;cursor:pointer}
 @media (orientation:portrait){.stage.fs .rotate{display:block;background:#000;color:var(--ega-yellow);text-align:center;font-size:20px;padding:6px 70px 6px 8px}}
 @media (orientation:landscape){
-  .stage.fs{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,32%);grid-template-rows:auto auto 1fr;align-items:start}
-  .stage.fs #scene{grid-column:1;grid-row:1/4;align-self:center;justify-self:center;width:min(100%,calc(100dvh*320/144));height:auto}
-  .stage.fs .sentence{grid-column:2;grid-row:1;margin-top:44px}
-  .stage.fs .msg{grid-column:2;grid-row:2;font-size:20px}
-  .stage.fs .ui{grid-column:2;grid-row:3;grid-template-columns:1fr}
+  .stage.fs{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,32%);grid-template-rows:auto auto auto 1fr;align-items:start;align-content:start}
+  .stage.fs #scene{grid-column:1;grid-row:1/5;align-self:center;justify-self:center;width:min(100%,calc(100dvh*320/144));height:auto}
+  .stage.fs .hud{grid-column:2;grid-row:1;padding-right:80px}
+  .stage.fs .sentence{grid-column:2;grid-row:2}
+  .stage.fs .msg{grid-column:2;grid-row:3;font-size:20px;min-height:0}
+  .stage.fs .ui{grid-column:2;grid-row:4;grid-template-columns:1fr}
   .stage.fs .inv{border-left:0;padding-left:0}
 }
 body.fs-lock{overflow:hidden}
@@ -372,6 +374,7 @@ body.fs-lock{overflow:hidden}
     <div class="stage" id="stage">
       <button class="fsexit" id="fsExit" type="button" aria-label="Exit full screen">✕ Exit</button>
       <div class="rotate">Turn your phone sideways for a bigger view</div>
+      <div class="hud" id="hud"></div>
       <canvas id="scene" width="320" height="144" aria-label="A pixel-art version of Dan's office: a tall green-framed window over wooded hills, an L-shaped wooden desk with a computer, a desk phone and a framed photo, wall shelves with a cascading pothos, a drawer unit, a trash bin and a pin board with postcards."></canvas>
       <div class="sentence" id="sentence">Look at</div>
       <div class="msg" id="msg" aria-live="polite">You're in your office. A revision deadline looms.</div>
@@ -531,9 +534,9 @@ body.fs-lock{overflow:hidden}
     say('You\'re in Room 7014. Sunlight, plants, and a revision deadline.');
     setVerb('look'); renderInv(); updScore();
   }
-  function say(t,html){html?msgEl.innerHTML=t:msgEl.textContent=t}
+  function say(t,html){html?msgEl.innerHTML=t:msgEl.textContent=t;var st=document.getElementById('stage');if(st&&st.classList.contains('fs')&&msgEl.scrollIntoView)msgEl.scrollIntoView({block:'nearest'})}
   function award(k,n){if(!S.awarded[k]){S.awarded[k]=1;S.score+=n;updScore()}}
-  function updScore(){var t='Score: '+S.score+' of 30 · Footnotes: '+Object.keys(S.eggs).length+' of '+NEGG;document.getElementById('scoreTop').textContent=t;document.getElementById('scoreFoot').textContent=t}
+  function updScore(){var t='Score: '+S.score+' of 30 · Footnotes: '+Object.keys(S.eggs).length+' of '+NEGG;document.getElementById('scoreTop').textContent=t;document.getElementById('hud').textContent=t;document.getElementById('scoreFoot').textContent=t}
 
   /* ---------- static background (drawn once) ---------- */
   var bg=document.createElement('canvas');bg.width=320;bg.height=144;
