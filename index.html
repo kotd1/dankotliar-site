@@ -290,6 +290,12 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
 .quest .how{color:var(--ega-dgray)}
 .gamebtns{margin:0 0 10px}
 /* full-screen game */
+.left,.side{display:contents}
+.fnote{display:none;background:var(--ega-yellow);color:#000;font-size:22px;padding:6px 12px;border:2px solid #000}
+.fnote.show{display:block}
+.fnote a{color:var(--ega-blue);text-decoration:underline}
+.fnote a:hover{background:var(--ega-blue);color:#fff}
+.fnote b{color:var(--ega-magenta)}
 .fsexit,.rotate,.hud{display:none}
 .stage.fs .hud{display:block;background:var(--ega-lmagenta);color:#000;font-size:20px;padding:4px 90px 4px 10px;border-bottom:2px solid #000}
 .stage.fs{position:fixed;inset:0;z-index:100;margin:0;border:0;overflow:auto;display:flex;flex-direction:column;background:var(--ega-blue)}
@@ -297,12 +303,14 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
 .stage.fs .fsexit{display:block;position:fixed;top:8px;right:8px;z-index:101;font:20px var(--sans);background:var(--ega-yellow);color:#000;border:2px solid #000;box-shadow:3px 3px 0 #000;padding:2px 10px;cursor:pointer}
 @media (orientation:portrait){.stage.fs .rotate{display:block;background:#000;color:var(--ega-yellow);text-align:center;font-size:20px;padding:6px 70px 6px 8px}}
 @media (orientation:landscape){
-  .stage.fs{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,32%);grid-template-rows:auto auto auto 1fr;align-items:start;align-content:start}
-  .stage.fs #scene{grid-column:1;grid-row:1/5;align-self:center;justify-self:center;width:min(100%,calc(100dvh*320/144));height:auto}
-  .stage.fs .hud{grid-column:2;grid-row:1;padding-right:80px}
-  .stage.fs .sentence{grid-column:2;grid-row:2}
-  .stage.fs .msg{grid-column:2;grid-row:3;font-size:20px;min-height:0}
-  .stage.fs .ui{grid-column:2;grid-row:4;grid-template-columns:1fr}
+  .stage.fs{flex-direction:row;overflow:hidden}
+  .stage.fs .left{display:flex;flex-direction:column;justify-content:center;align-items:center;flex:1;min-width:0;gap:10px}
+  .stage.fs .left #scene{width:min(100%,calc((100dvh - 110px)*320/144));height:auto}
+  .stage.fs .left .fnote{align-self:stretch;margin:0 12px}
+  .stage.fs .side{display:flex;flex-direction:column;width:32%;min-width:250px;height:100%;overflow-y:auto}
+  .stage.fs .hud{padding-right:80px}
+  .stage.fs .msg{font-size:20px}
+  .stage.fs .ui{grid-template-columns:1fr}
   .stage.fs .inv{border-left:0;padding-left:0}
 }
 body.fs-lock{overflow:hidden}
@@ -374,8 +382,12 @@ body.fs-lock{overflow:hidden}
     <div class="stage" id="stage">
       <button class="fsexit" id="fsExit" type="button" aria-label="Exit full screen">✕ Exit</button>
       <div class="rotate">Turn your phone sideways for a bigger view</div>
-      <div class="hud" id="hud"></div>
+      <div class="left">
       <canvas id="scene" width="320" height="144" aria-label="A pixel-art version of Dan's office: a tall green-framed window over wooded hills, an L-shaped wooden desk with a computer, a desk phone and a framed photo, wall shelves with a cascading pothos, a drawer unit, a trash bin and a pin board with postcards."></canvas>
+        <div class="fnote" id="fnote" aria-live="polite"></div>
+      </div>
+      <div class="side">
+        <div class="hud" id="hud"></div>
       <div class="sentence" id="sentence">Look at</div>
       <div class="msg" id="msg" aria-live="polite">You're in your office. A revision deadline looms.</div>
       <div class="ui">
@@ -388,6 +400,7 @@ body.fs-lock{overflow:hidden}
           <button data-v="walk">Walk to</button>
         </div>
         <div class="inv" id="inv"><span class="label">Inventory</span><span class="label" id="empty">(empty)</span></div>
+      </div>
       </div>
     </div>
   </section>
@@ -531,7 +544,7 @@ body.fs-lock{overflow:hidden}
   function reset(){
     S={verb:'look',item:null,on:false,mug:'desk',drank:false,book:false,won:false,score:0,awarded:{},eggs:{},talk:0,
        dan:{x:160,tx:160,face:1,step:0},pending:null};
-    say('You\'re in Room 7014. Sunlight, plants, and a revision deadline.');
+    say('You\'re in Room 7014. Sunlight, plants, and a revision deadline.');document.getElementById('fnote').classList.remove('show');
     setVerb('look'); renderInv(); updScore();
   }
   function say(t,html){html?msgEl.innerHTML=t:msgEl.textContent=t;var st=document.getElementById('stage');if(st&&st.classList.contains('fs')&&msgEl.scrollIntoView)msgEl.scrollIntoView({block:'nearest'})}
@@ -767,9 +780,10 @@ body.fs-lock{overflow:hidden}
     };
     var r=R[v][id]!==undefined?R[v][id]:R[v]._;
     if(typeof r==='function')r=r();
-    var egg=EGGS[v+':'+id];
+    var egg=EGGS[v+':'+id],fn=document.getElementById('fnote');
     if(egg){var fresh=!S.eggs[v+':'+id];S.eggs[v+':'+id]=1;updScore();
-      r=(r||'')+'<br><span class="egg">'+(fresh?'Footnote found!':'Footnote')+'</span> <a href="'+egg[1]+'" target="_blank" rel="noopener">Read “'+egg[0]+'” ↗</a>'}
+      fn.innerHTML='<b>'+(fresh?'Footnote found!':'Footnote')+'</b> <a href="'+egg[1]+'" target="_blank" rel="noopener">Read “'+egg[0]+'” ↗</a>';fn.classList.add('show')}
+    else fn.classList.remove('show');
     if(r)say(r,/</.test(r));
   }
   function toScene(e){var b=cv.getBoundingClientRect();return{x:(e.clientX-b.left)*320/b.width,y:(e.clientY-b.top)*144/b.height}}
