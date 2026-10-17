@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dan M. Kotliar — Sociologist, University of Haifa</title>
+<title>Dan M. Kotliar | Sociologist, University of Haifa</title>
 <meta name="description" content="Dan M. Kotliar is a sociologist at the University of Haifa studying algorithms, AI, data infrastructures and their ties to culture, politics and everyday life.">
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LHS1CZT887"></script>
@@ -200,10 +200,33 @@ html[data-mode="retro"] #game{display:block}
 .gamebtns{display:flex;gap:10px;flex-wrap:wrap}
 #music[aria-pressed="true"]{background:var(--ega-lgreen);color:#000;border-color:#000}
 
+
+/* publication boxes */
+.pubhint{font-size:14px;color:var(--muted);margin:-8px 0 8px}
+details.pub>summary{list-style:none;cursor:pointer;display:block;position:relative;padding-right:28px}
+details.pub>summary::-webkit-details-marker{display:none}
+details.pub>summary::after{content:"+";position:absolute;right:4px;top:0;font-weight:600;color:var(--accent);font-size:18px}
+details.pub[open]>summary::after{content:"\2212"}
+details.pub>summary:hover .t{color:var(--accent)}
+.abs{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin-top:10px;font-size:15px}
+.abs p{margin:0 0 8px;color:var(--ink)}
+.abs a{font-weight:600}
+html[data-mode="retro"] .pubhint{font-size:20px;color:var(--ega-dgray)}
+html[data-mode="retro"] details.pub>summary::after{content:"[+]";font:20px var(--sans);color:var(--ega-red)}
+html[data-mode="retro"] details.pub[open]>summary::after{content:"[-]"}
+html[data-mode="retro"] details.pub>summary:hover .t{background:var(--ega-blue);color:var(--ega-white)}
+html[data-mode="retro"] .abs{background:var(--ega-blue);color:var(--ega-white);border:3px solid #000;box-shadow:5px 5px 0 var(--ega-lcyan);font-size:20px}
+html[data-mode="retro"] .abs p{color:var(--ega-white)}
+html[data-mode="retro"] .abs a{color:var(--ega-yellow)}
+html[data-mode="retro"] .abs a:hover{background:var(--ega-yellow);color:#000}
+.courses{grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr))}
+.contact dd,.pubs .m{overflow-wrap:anywhere}
+html,body{overflow-x:hidden}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 
 @media (max-width:720px){
-  .wrap{padding:0 16px}
+  .wrap{padding:0 22px}
   .bar{height:auto!important;flex-wrap:wrap;padding:10px 0;gap:10px}
   nav{order:3;width:100%;margin-left:0;gap:18px;padding-bottom:4px}
   .switch{margin-left:auto}
@@ -213,7 +236,7 @@ html[data-mode="retro"] #game{display:block}
   .updates li{grid-template-columns:1fr;gap:2px}
   .ui{grid-template-columns:1fr}
   .inv{border-left:0;padding-left:0}
-  html[data-mode="retro"] section > *:not(h2){margin-left:12px;margin-right:12px}
+  html[data-mode="retro"] section > *:not(h2){margin-left:16px;margin-right:16px}
 }
 </style>
 </head>
@@ -277,41 +300,42 @@ html[data-mode="retro"] #game{display:block}
 
   <section id="about">
     <h2><span class="pro">About</span><span class="retro">BIO.TXT</span></h2>
-    <p>I'm a senior lecturer at the Department of Sociology, the University of Haifa. My research explores the deep ties between data-driven technologies and contemporary society. Drawing on cultural sociology, science and technology studies (STS), and the sociology of knowledge, I investigate how algorithms shape—and are shaped by—culture, politics, and everyday life.</p>
+    <p>I'm a senior lecturer at the Department of Sociology, the University of Haifa. My research explores the deep ties between data-driven technologies and contemporary society. Drawing on cultural sociology, science and technology studies (STS), and the sociology of knowledge, I investigate how algorithms shape, and are shaped by, culture, politics, and everyday life.</p>
     <p>From questions of identity, power, and choice to emerging terrains such as AI ethics, AI hype, surveillance, data infrastructures, and AI-driven science, my work examines the ways data-intensive technologies transform social worlds. Together, my research projects highlight the growing influence of algorithms while offering grounded, critical perspectives on some of the most pressing challenges of our datafied age.</p>
   </section>
 
   <section id="writing">
     <h2><span class="pro">Writing</span><span class="retro">WRITING.DOC</span></h2>
     <p class="filterbar" id="filterbar" hidden>Showing papers on <b id="ftopic"></b> <button id="fclear">Show all papers</button></p>
+    <p class="pubhint"><span class="pro">Click a title for a short summary and a link to the full text.</span><span class="retro">&gt; Click a title to open it.</span></p>
     <h3>2025</h3>
     <ul class="pubs">
-      <li data-topics="hype"><a class="t" href="https://doi.org/10.1080/1369118x.2025.2531165">Can't Stop the Hype: Scrutinizing AI's Realities</a><span class="m">Kotliar · <em>Information, Communication &amp; Society</em></span></li>
-      <li data-topics="hype culture"><a class="t" href="https://doi.org/10.1177/14614448251342575">Silicon Valley Revisited: On Californian Ideologies and the Differences They Make</a><span class="m">Kotliar · <em>New Media &amp; Society</em></span></li>
+      <li data-topics="hype"><details class="pub"><summary><span class="t">Can&#x27;t Stop the Hype: Scrutinizing AI&#x27;s Realities</span><span class="m">Kotliar · <em>Information, Communication &amp; Society</em></span></summary><div class="abs"><p>Much of what we know about AI&#x27;s supposed revolutions comes from media sensationalism and marketing hype. This article offers a framework for studying AI that scrutinizes hype while recognizing its power, including a typology of five types of AI hype and six heuristics for examining them.</p><a href="https://www.tandfonline.com/doi/full/10.1080/1369118X.2025.2531165" target="_blank" rel="noopener">Read the full text (open access) ↗</a></div></details></li>
+      <li data-topics="hype culture ethics"><details class="pub"><summary><span class="t">Silicon Valley Revisited: On Californian Ideologies and the Differences They Make</span><span class="m">Kotliar · <em>New Media &amp; Society</em></span></summary><div class="abs"><p>Based on 50 interviews with Israelis who immigrated to Silicon Valley, this article shows how cross-cultural encounters shape the way developers perceive their algorithms and their ethical implications, and calls for a more diverse view of Silicon Valley&#x27;s ideologies.</p><a href="https://journals.sagepub.com/doi/10.1177/14614448251342575" target="_blank" rel="noopener">Read the full text (open access) ↗</a></div></details></li>
     </ul>
     <h3>2024</h3>
     <ul class="pubs">
-      <li data-topics="science"><a class="t" href="https://www.nature.com/articles/s41599-024-04209-5">Commodifying the Microbial Self: Microbiome-based Personalization and the Quest for Symbiotic Singularity</a><span class="m">Grosglik &amp; Kotliar · <em>Humanities and Social Sciences Communications</em></span></li>
-      <li data-topics="infra surveillance"><a class="t" href="https://doi.org/10.1080/1369118X.2024.2343816">Migrating the State into Corporate Clouds</a><span class="m">Kotliar &amp; <a href="https://alexgekker.com/">Gekker</a> · <em>Information, Communication &amp; Society</em></span></li>
-      <li data-topics="surveillance"><a class="t" href="https://doi.org/10.1080/1369118X.2023.2245873">Keeping Pegasus on the Wing: Legitimizing Cyber Espionage</a><span class="m">Kotliar &amp; <a href="https://elinorcarmi.com/">Carmi</a> · <em>Information, Communication &amp; Society</em></span></li>
+      <li data-topics="science"><details class="pub"><summary><span class="t">Commodifying the Microbial Self: Microbiome-based Personalization and the Quest for Symbiotic Singularity</span><span class="m">Grosglik &amp; Kotliar · <em>Humanities and Social Sciences Communications</em></span></summary><div class="abs"><p>A study of a startup selling AI-driven, microbiome-based personalized nutrition, which promises users a <em>symbiotic singularity</em>: a unique human-microbial identity. Users first embrace this identity, but later scale back to a more conventional, modernist view of themselves.</p><a href="https://www.nature.com/articles/s41599-024-04209-5" target="_blank" rel="noopener">Read the full text (open access) ↗</a></div></details></li>
+      <li data-topics="infra surveillance"><details class="pub"><summary><span class="t">Migrating the State into Corporate Clouds</span><span class="m">Kotliar &amp; <a href="https://alexgekker.com/">Gekker</a> · <em>Information, Communication &amp; Society</em></span></summary><div class="abs"><p>What happens when an entire state migrates into corporate clouds? Through the case of Project Nimbus, a $1.2 billion government cloud tender, this article traces the ramifications: the state's growing dependence on tech giants, the spread of Silicon Valley data ideologies, and deepening power and information asymmetries between the state and big tech.</p><a href="https://www.tandfonline.com/doi/full/10.1080/1369118X.2024.2343816" target="_blank" rel="noopener">Read the full text (open access) ↗</a></div></details></li>
+      <li data-topics="surveillance"><details class="pub"><summary><span class="t">Keeping Pegasus on the Wing: Legitimizing Cyber Espionage</span><span class="m">Kotliar &amp; <a href="https://elinorcarmi.com/">Carmi</a> · <em>Information, Communication &amp; Society</em></span></summary><div class="abs"><p>How did NSO Group, the Israeli spyware firm behind Pegasus, defend itself in public? This article identifies four legitimation practices: securitization, Zionist patriotism, ethics washing and normalization, which together help sustain <em>surveillance realism</em>.</p><a href="https://www.tandfonline.com/doi/full/10.1080/1369118X.2023.2245873" target="_blank" rel="noopener">Read the full text (open access) ↗</a></div></details></li>
     </ul>
     <h3>2023</h3>
     <ul class="pubs">
-      <li data-topics="science culture"><a class="t" href="https://doi.org/10.1177/1357034X231151855">On the Contesting Conceptualisation of the Human Body: Between ‘Homo-Microbis’ and ‘Homo-Algorithmicus’</a><span class="m">Kotliar &amp; Grosglik · <em>Body &amp; Society</em> 29(3), 81–108</span></li>
-      <li data-topics="ethics"><a class="t" href="https://doi.org/10.1177/14614448221145728">Contextualizing the Ethics of Algorithms: A Socio-professional Approach</a><span class="m">Avnoon, Kotliar &amp; Rivnai-Bahir · <em>New Media &amp; Society</em> 26(10), 5962–5982</span></li>
+      <li data-topics="science culture"><details class="pub"><summary><span class="t">On the Contesting Conceptualisation of the Human Body: Between ‘Homo-Microbis’ and ‘Homo-Algorithmicus’</span><span class="m">Kotliar &amp; Grosglik · <em>Body &amp; Society</em> 29(3), 81–108</span></summary><div class="abs"><p>Based on an ethnography of a microbiome-based personalized nutrition project and the start-up that grew out of it, this article shows that the <em>homo-microbial</em> body depends on opaque machine-learning algorithms: <em>homo-microbis</em> is also a <em>homo-algorithmicus</em>.</p><a href="https://journals.sagepub.com/doi/10.1177/1357034X231151855" target="_blank" rel="noopener">Read the full text (open access) ↗</a></div></details></li>
+      <li data-topics="ethics"><details class="pub"><summary><span class="t">Contextualizing the Ethics of Algorithms: A Socio-professional Approach</span><span class="m">Avnoon, Kotliar &amp; Rivnai-Bahir · <em>New Media &amp; Society</em> 26(10), 5962–5982</span></summary><div class="abs"><p>Why do the people who build algorithms so often sideline AI ethics? Based on interviews with data scientists, this article identifies three moral logics: ethics as a personal endeavor, ethics as hindering progress, and ethics as a commodity, all rooted in the techno-libertarian culture of engineering.</p><a href="https://journals.sagepub.com/doi/10.1177/14614448221145728" target="_blank" rel="noopener">Read the full text (open access) ↗</a></div></details></li>
     </ul>
     <details class="more">
-      <summary><span class="pro">Earlier work (2013–2022)</span><span class="retro">[+] Open ARCHIVE.ZIP</span></summary>
+      <summary><span class="pro">Earlier work (2013–2022)</span><span class="retro">▸ MORE.EXE (earlier papers)</span></summary>
       <ul class="pubs">
-        <li data-topics="culture"><span class="t">Capitalist Subjectivity, Tinder, and the Emotionalization of the Web</span><span class="m">Illouz &amp; Kotliar (2022) · In <em>Routledge Handbook of Digital Consumption</em>, pp. 229–240</span></li>
-        <li data-topics="ethics"><a class="t" href="https://www.jstor.org/stable/27083981">What We Talk About When We Talk About AI Ethics</a><span class="m">Avnoon, Kotliar &amp; Rivnai-Bahir (2021) · <em>Israeli Sociology</em> 22(2), 171–191 (Hebrew)</span></li>
-        <li data-topics="culture"><a class="t" href="https://doi.org/10.1177/0162243920925147">Who Gets to Choose? On the Socio-algorithmic Construction of Choice</a><span class="m">Kotliar (2021) · <em>Science, Technology, &amp; Human Values</em> 46(2), 346–375</span></li>
-        <li data-topics="culture"><a class="t" href="https://doi.org/10.1177/1461444820912535">The Return of the Social: Algorithmic Identity in an Age of Symbolic Demise</a><span class="m">Kotliar (2020) · <em>New Media &amp; Society</em> 22(7), 1152–1167</span></li>
-        <li data-topics="culture surveillance"><a class="t" href="https://doi.org/10.1007/s11186-020-09404-2">Data Orientalism: On the Algorithmic Construction of the Non-Western Other</a><span class="m">Kotliar (2020) · <em>Theory &amp; Society</em> 49, 919–939</span></li>
-        <li><a class="t" href="https://doi.org/10.1016/j.socscimed.2019.112524">Trauma as Badge of Honour: Holocaust Descendant Resilient Vulnerability</a><span class="m">Kidron, Kotliar &amp; Kirmayer (2019) · <em>Social Science &amp; Medicine</em> 239, 1–9</span></li>
-        <li><a class="t" href="https://doi.org/10.1007/s11133-016-9334-7">Emotional Oppositions: The Political Struggle over Citizens' Emotions</a><span class="m">Kotliar (2016) · <em>Qualitative Sociology</em> 39(3), 267–286</span></li>
-        <li><a class="t" href="https://doi.org/10.1177/1049732315612715">Depression Narratives in Blogs: A Collaborative Quest for Coherence</a><span class="m">Kotliar (2016) · <em>Qualitative Health Research</em> 26(9), 1203–1215</span></li>
-        <li><a class="t" href="https://mediaframes.sapir.ac.il/wp-content/uploads/2022/07/media_frames_11_Part3.pdf">Public Seclusion: Depression Narratives in Blogs</a><span class="m">Kotliar (2013) · <em>Misgarot Media</em> 11, 1–29 (Hebrew)</span></li>
+        <li data-topics="culture"><details class="pub"><summary><span class="t">Capitalist Subjectivity, Tinder, and the Emotionalization of the Web</span><span class="m">Illouz &amp; Kotliar (2022) · In <em>Routledge Handbook of Digital Consumption</em>, pp. 229–240</span></summary><div class="abs"><p>A critical analysis of Tinder and the techno-commodification of emotional life, identifying five ways dating apps reshape sociality, and arguing that understanding online capitalism requires attention to how value is extracted algorithmically from emotions.</p><a href="https://doi.org/10.4324/9781003317524-22" target="_blank" rel="noopener">Go to the publisher's page ↗</a></div></details></li>
+        <li data-topics="ethics"><details class="pub"><summary><span class="t">What We Talk About When We Talk About AI Ethics</span><span class="m">Avnoon, Kotliar &amp; Rivnai-Bahir (2021) · <em>Israeli Sociology</em> 22(2), 171–191 (Hebrew)</span></summary><div class="abs"><p>Based on 60 interviews with Israeli data scientists, this Hebrew-language article asks how they understand and describe algorithmic ethics, and which ideologies and worldviews shape it.</p><a href="https://www.jstor.org/stable/27083981" target="_blank" rel="noopener">Go to the publisher's page ↗</a></div></details></li>
+        <li data-topics="culture"><details class="pub"><summary><span class="t">Who Gets to Choose? On the Socio-algorithmic Construction of Choice</span><span class="m">Kotliar (2021) · <em>Science, Technology, &amp; Human Values</em> 46(2), 346–375</span></summary><div class="abs"><p>Based on an ethnography of data analytics companies, this article examines <em>choice-inducing algorithms</em>, systems designed to shape people's choices. It shows they are shaped by their designers' meaning systems, organizational relations, nonhuman agents and geopolitics, and that their deeper aim is to turn people into choosers.</p><a href="https://doi.org/10.1177/0162243920925147" target="_blank" rel="noopener">Go to the publisher's page ↗</a></div></details></li>
+        <li data-topics="culture"><details class="pub"><summary><span class="t">The Return of the Social: Algorithmic Identity in an Age of Symbolic Demise</span><span class="m">Kotliar (2020) · <em>New Media &amp; Society</em> 22(7), 1152–1167</span></summary><div class="abs"><p>Algorithmically produced clusters become named identity categories through a <em>return of the social</em>. Such categories are <em>epistemic amalgams</em> of algorithmic output, human expertise and interpersonal factors, which calls their explainability into question.</p><a href="https://doi.org/10.1177/1461444820912535" target="_blank" rel="noopener">Go to the publisher's page ↗</a></div></details></li>
+        <li data-topics="culture surveillance"><details class="pub"><summary><span class="t">Data Orientalism: On the Algorithmic Construction of the Non-Western Other</span><span class="m">Kotliar (2020) · <em>Theory &amp; Society</em> 49, 919–939</span></summary><div class="abs"><p>Following a user-profiling company as it tries to sell its services to East Asian firms, this article develops the concept of <em>data orientalism</em>. It shows that the <em>algorithmic gaze</em> both continues and reverses the colonial gaze, and argues that algorithms are intercultural, with power flowing in more than one direction.</p><a href="https://doi.org/10.1007/s11186-020-09404-2" target="_blank" rel="noopener">Go to the publisher's page ↗</a></div></details></li>
+        <li><details class="pub"><summary><span class="t">Transmitted Trauma as Badge of Honor: Phenomenological Accounts of Holocaust Descendant Resilient Vulnerability</span><span class="m">Kidron, Kotliar &amp; Kirmayer (2019) · <em>Social Science &amp; Medicine</em> 239, 1–9</span></summary><div class="abs"><p>Drawing on 75 interviews with Jewish-Israeli children of Holocaust survivors, this study finds that descendants normalize and even valorize their emotional wounds, challenging pathologizing models of transmitted trauma and binary views of resilience and vulnerability.</p><a href="https://doi.org/10.1016/j.socscimed.2019.112524" target="_blank" rel="noopener">Go to the publisher's page ↗</a></div></details></li>
+        <li><details class="pub"><summary><span class="t">Emotional Oppositions: The Political Struggle over Citizens&#x27; Emotions</span><span class="m">Kotliar (2016) · <em>Qualitative Sociology</em> 39(3), 267–286</span></summary><div class="abs"><p>A participant observation of Israeli mental health professionals who opposed a bill restricting public mourning of the Nakba, showing how they promoted an oppositional emotional style and treating emotions as a contested political battleground.</p><a href="https://doi.org/10.1007/s11133-016-9334-7" target="_blank" rel="noopener">Go to the publisher's page ↗</a></div></details></li>
+        <li><details class="pub"><summary><span class="t">Depression Narratives in Blogs: A Collaborative Quest for Coherence</span><span class="m">Kotliar (2016) · <em>Qualitative Health Research</em> 26(9), 1203–1215</span></summary><div class="abs"><p>Blogs by women with major depression bridge the seclusion of depression and the public exposure of blogging, letting writers share intimate narratives, build community and revise their stories with readers in <em>narrative sandboxes</em>.</p><a href="https://doi.org/10.1177/1049732315612715" target="_blank" rel="noopener">Go to the publisher's page ↗</a></div></details></li>
+        <li><details class="pub"><summary><span class="t">Public Seclusion: Depression Narratives in Blogs</span><span class="m">Kotliar (2013) · <em>Misgarot Media</em> 11, 1–29 (Hebrew)</span></summary><div class="abs"><p>A Hebrew-language study showing how depression blogs offer a safe private space and a public, supportive community at once, serving as an arena for testing cultural models that might explain depression.</p><a href="https://mediaframes.sapir.ac.il/wp-content/uploads/2022/07/media_frames_11_Part3.pdf" target="_blank" rel="noopener">Read the full text (open access) ↗</a></div></details></li>
       </ul>
     </details>
   </section>
@@ -671,7 +695,7 @@ html[data-mode="retro"] #game{display:block}
     [].forEach.call(document.querySelectorAll('#writing .pubs'),function(ul){
       var any=[].some.call(ul.children,function(li){return !li.hidden});ul.hidden=!any;
       var prev=ul.previousElementSibling;if(prev&&prev.tagName==='H3')prev.hidden=!any});
-    var det=document.querySelector('#writing details');
+    var det=document.querySelector('#writing details.more');
     if(det){var inDet=[].some.call(det.querySelectorAll('li'),function(li){return !li.hidden});det.hidden=!!topic&&!inDet;if(topic&&inDet)det.open=true}
     bar.hidden=!topic;ft.textContent=label||'';
     tags.forEach(function(b){b.parentNode.classList.toggle('on',b.dataset.topic===topic);b.setAttribute('aria-pressed',b.dataset.topic===topic)});
