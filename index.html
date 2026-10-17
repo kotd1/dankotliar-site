@@ -186,8 +186,8 @@ html[data-mode="retro"] #game{display:block}
 #scene{display:block;width:100%;height:auto;image-rendering:pixelated;cursor:crosshair}
 .sentence{background:#000;color:var(--ega-lcyan);text-align:center;min-height:30px;padding:2px 8px;font-size:22px}
 .msg{background:var(--ega-blue);color:var(--ega-white);min-height:56px;padding:6px 12px;font-size:22px}
-.msg a{color:var(--ega-yellow)}
-.msg a:hover{background:var(--ega-yellow);color:#000}
+html[data-mode="retro"] .msg a{color:var(--ega-yellow);text-decoration:underline}
+html[data-mode="retro"] .msg a:hover{background:var(--ega-yellow);color:#000}
 .ui{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--ega-blue);padding:4px 12px 12px}
 .verbs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
 .verbs button,.inv button,.restart{font:22px var(--sans);background:var(--ega-blue);color:var(--ega-lcyan);border:2px solid var(--ega-lblue);padding:2px 6px;cursor:pointer;text-align:left}
@@ -221,7 +221,43 @@ html[data-mode="retro"] .abs a{color:var(--ega-yellow)}
 html[data-mode="retro"] .abs a:hover{background:var(--ega-yellow);color:#000}
 .courses{grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr))}
 .contact dd,.pubs .m{overflow-wrap:anywhere}
-html,body{overflow-x:hidden}
+html,body{overflow-x:clip}
+
+
+/* link pills + contact cards */
+.links{gap:10px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);text-decoration:none;font-size:15px;font-weight:500;transition:background .15s,border-color .15s,color .15s}
+.pill svg,.ccard svg{width:17px;height:17px;flex-shrink:0}
+.pill:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.ccards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:14px;margin-top:8px}
+.ccard{display:flex;flex-direction:column;gap:4px;padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--ink);text-decoration:none}
+.ccard svg{width:22px;height:22px;color:var(--accent);margin-bottom:6px}
+a.ccard:hover{border-color:var(--accent);background:var(--accent-soft)}
+.ccard .cl{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.ccard .cv{font-weight:600;overflow-wrap:anywhere}
+a.ccard .cv{color:var(--accent)}
+.ccard .cs{font-size:14px;color:var(--muted)}
+html[data-mode="retro"] .links a.pill,html[data-mode="retro"] .links a.pill:hover{color:#000}
+html[data-mode="retro"] .pill{border-radius:0;border:2px solid #000;box-shadow:3px 3px 0 #000;font:21px var(--sans);padding:2px 12px;color:#000}
+html[data-mode="retro"] .links .pill:nth-child(1){background:var(--ega-lcyan)}
+html[data-mode="retro"] .links .pill:nth-child(2){background:var(--ega-lmagenta)}
+html[data-mode="retro"] .links .pill:nth-child(3){background:var(--ega-yellow)}
+html[data-mode="retro"] .links .pill:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #000;color:#000}
+html[data-mode="retro"] .ccard{border-radius:0;background:var(--ega-blue);color:var(--ega-white);border:3px solid #000;box-shadow:5px 5px 0 var(--ega-lcyan)}
+html[data-mode="retro"] .ccard svg{color:var(--ega-yellow)}
+html[data-mode="retro"] .ccard .cl{color:var(--ega-lcyan);font-size:18px}
+html[data-mode="retro"] .ccard .cv,html[data-mode="retro"] a.ccard .cv{color:var(--ega-yellow);font-size:22px}
+html[data-mode="retro"] .ccard .cs{color:var(--ega-white);font-size:19px}
+html[data-mode="retro"] a.ccard:hover{background:var(--ega-magenta);color:var(--ega-white)}
+
+
+
+/* header music button (game mode) */
+html[data-mode="retro"] .hdrmusic{display:inline-block;margin-left:auto;font:20px var(--sans);background:var(--ega-lgreen);color:#000;border:2px solid #000;box-shadow:3px 3px 0 #000;padding:2px 10px;cursor:pointer;flex-shrink:0;white-space:nowrap}
+html[data-mode="retro"] .hdrmusic[aria-pressed="false"]{background:var(--ega-white)}
+html[data-mode="retro"] nav{margin-left:auto}
+html[data-mode="retro"] .hdrmusic{margin-left:0}
+@media (max-width:720px){html[data-mode="retro"] .hdrmusic{margin-left:auto}html[data-mode="retro"] .switch{margin-left:0}}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 
@@ -248,6 +284,7 @@ html,body{overflow-x:hidden}
     <nav aria-label="Sections">
       <a href="#about">Bio</a><a href="#writing">Writing</a><a href="#teaching">Teaching</a><a href="#updates">Updates</a><a href="#contact">Contact</a>
     </nav>
+    <button class="retro hdrmusic" id="hdrMusic" type="button" aria-pressed="false" title="Music on/off">♪ Off</button>
     <button class="switch" id="modeSwitch" aria-pressed="false" title="Switch display mode">
       <span class="track"><span class="knob"></span></span>
       <span class="pro">Play mode</span><span class="retro">Exit game</span>
@@ -267,9 +304,9 @@ html,body{overflow-x:hidden}
         <li><button data-topic="culture">Algorithms &amp; culture</button></li><li><button data-topic="ethics">AI ethics</button></li><li><button data-topic="hype">AI hype</button></li><li><button data-topic="surveillance">Surveillance</button></li><li><button data-topic="infra">Data infrastructures</button></li><li><button data-topic="science">AI-driven science</button></li>
       </ul>
       <div class="links">
-        <a href="mailto:dkotliar@soc.haifa.ac.il">Email</a>
-        <a href="https://bsky.app/profile/danmk.bsky.social" target="_blank" rel="noopener">Bluesky</a>
-        <a href="#writing">Publications</a>
+        <a class="pill" href="mailto:dkotliar@soc.haifa.ac.il" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Email</span></a>
+        <a class="pill" href="https://bsky.app/profile/danmk.bsky.social" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Bluesky</span></a>
+        <a class="pill" href="#writing"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 12h8M9 16h8" stroke="currentColor" stroke-width="2"/></svg><span>Publications</span></a>
       </div>
       <div class="retro prompt">C:\KOTLIAR&gt; adventure.exe<span class="cur">_</span></div>
     </div>
@@ -373,17 +410,11 @@ html,body{overflow-x:hidden}
 
   <section id="contact">
     <h2><span class="pro">Contact</span><span class="retro">CONTACT.EXE</span></h2>
-    <div class="contact">
-      <div>
-        <p>I'm always happy to be in touch. Email me or leave a message through the form, and I'll respond promptly.</p>
-        <p><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSez11PQtwOd2_UjJLlhCVG1ipt26t-5IbP6G6fzhjKzzBdhXA/viewform" target="_blank" rel="noopener">Send a message</a></p>
-      </div>
-      <dl>
-        <dt>Email</dt><dd><a href="mailto:dkotliar@soc.haifa.ac.il">dkotliar@soc.haifa.ac.il</a></dd>
-        <dt>Office</dt><dd>Rabin Building, room 7014 · +972-4-824-9396</dd>
-        <dt>Office hours</dt><dd>Tuesdays &amp; Wednesdays, 10:00–12:00, by appointment</dd>
-        <dt>Elsewhere</dt><dd><a href="https://bsky.app/profile/danmk.bsky.social" target="_blank" rel="noopener">Bluesky @danmk</a></dd>
-      </dl>
+    <p>I'm always happy to be in touch.</p>
+    <div class="ccards">
+      <a class="ccard" href="mailto:dkotliar@soc.haifa.ac.il" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="cl">Email</span><span class="cv">Send me an email →</span></a>
+      <a class="ccard" href="https://bsky.app/profile/danmk.bsky.social" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="cl">Bluesky</span><span class="cv">Find me on Bluesky →</span></a>
+      <div class="ccard"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="cl">Office hours</span><span class="cv">Tuesdays &amp; Wednesdays, 10:00–12:00</span><span class="cs">By appointment, please email in advance. Rabin Building, room 7014 · +972-4-824-9396</span></div>
     </div>
   </section>
 </main>
@@ -708,9 +739,11 @@ html,body{overflow-x:hidden}
   document.getElementById('fclear').addEventListener('click',function(){apply(null)});
 })();
 
-/* ---------- original chiptune soundtrack (Web Audio, off by default) ---------- */
+/* ---------- original chiptune soundtrack (Web Audio). Starts when a visitor enters game mode; muting is remembered. ---------- */
 (function(){
-  var btn=document.getElementById('music'),foot=document.getElementById('soundFoot');
+  var btns=[document.getElementById('music'),document.getElementById('hdrMusic')],foot=document.getElementById('soundFoot');
+  var root=document.documentElement,wasPlaying=false;
+  function pref(v){try{if(v)localStorage.setItem('dk-music',v);return localStorage.getItem('dk-music')}catch(e){return null}}
   var AC,master,timer,step=0,nextT=0,playing=false,E8=60/132/2;
   // 8 bars of eighth notes, MIDI numbers (0 = rest). Original melody in A minor.
   var LEAD=[76,0,81,0,84,83,81,76, 77,0,81,0,84,0,81,77, 79,0,83,0,86,84,83,79, 80,0,83,0,88,0,86,83,
@@ -731,14 +764,47 @@ html,body{overflow-x:hidden}
     }
   }
   function start(){
-    if(!AC){AC=new (window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=0.7;master.connect(AC.destination);
+    if(playing)return;
+    if(!AC){AC=new (window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=0.45;master.connect(AC.destination);
       noise=AC.createBuffer(1,AC.sampleRate*0.05,AC.sampleRate);var d=noise.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=Math.random()*2-1}
     AC.resume();nextT=AC.currentTime+0.05;step=0;timer=setInterval(tick,25);playing=true;ui();
   }
   function stop(){clearInterval(timer);playing=false;ui()}
-  function ui(){btn.textContent='♪ Music: '+(playing?'on':'off');btn.setAttribute('aria-pressed',playing);foot.textContent='Sound: '+(playing?'on':'off')}
-  btn.addEventListener('click',function(){playing?stop():start()});
-  document.addEventListener('visibilitychange',function(){if(document.hidden&&playing)stop()});
+  function ui(){
+    btns[0].textContent='♪ Music: '+(playing?'on':'off');btns[1].textContent='♪ '+(playing?'On':'Off');
+    btns.forEach(function(b){b.setAttribute('aria-pressed',playing)});foot.textContent='Sound: '+(playing?'on':'off');
+  }
+  function toggle(){if(playing){stop();pref('off')}else{start();pref('on')}}
+  btns.forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();toggle()})});
+  var wantMusic=function(){return root.getAttribute('data-mode')==='retro'&&pref()!=='off'};
+  // entering game mode (a click, so browsers allow sound) starts the music
+  document.getElementById('modeSwitch').addEventListener('click',function(){
+    if(root.getAttribute('data-mode')==='retro'){if(pref()!=='off')start()}else stop();
+  });
+  // returning visitors who land directly in game mode: start on their first click or key press
+  function firstGesture(e){
+    if(e.target.closest&&e.target.closest('#hdrMusic,#music,#modeSwitch'))return;
+    document.removeEventListener('pointerdown',firstGesture,true);document.removeEventListener('keydown',firstGesture,true);
+    if(wantMusic())start();
+  }
+  if(root.getAttribute('data-mode')==='retro'){document.addEventListener('pointerdown',firstGesture,true);document.addEventListener('keydown',firstGesture,true)}
+  // pause while the tab is hidden, resume when visitors come back
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){wasPlaying=playing;if(playing)stop()}
+    else if(wasPlaying&&wantMusic()){start();wasPlaying=false}
+  });
+  ui();
+})();
+
+/* ---------- email and Bluesky links: open in a new tab ---------- */
+(function(){
+  [].forEach.call(document.querySelectorAll('a[href^="mailto:"], a[href*="bsky.app"]'),function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var w=window.open(a.href,'_blank');
+      if(!w)location.href=a.href; // if the browser blocks new tabs, fall back to the normal behavior
+    });
+  });
 })();
 </script>
 </body>
