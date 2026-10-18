@@ -24,6 +24,8 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-LHS1CZT887');
+  // small helper for custom events (sections viewed, Play mode, game, etc.)
+  function track(name, params){ try{ gtag('event', name, params || {}); }catch(e){} }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -683,7 +685,7 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
         if(!S.on)return say('The computer is asleep. Wake it up first.');
         if(!S.drank)return say('You stare at the theory. The theory stares back. You need coffee first.');
         if(S.won)return say('It\'s already accepted. Don\'t tempt fate.');
-        S.won=true;award('win',10);
+        S.won=true;award('win',10);track('game_win');
         return say('You weave in the theory, cite generously and hit Submit… <b>ACCEPTED!</b> You finished the game. Your reward: <a href="#writing">the real publication list</a>.',true);
       }
       if(it==='mug'&&id==='computer')return say('Never mix coffee and hardware.');
@@ -743,7 +745,9 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
   function toScene(e){var b=cv.getBoundingClientRect();return{x:(e.clientX-b.left)*320/b.width,y:(e.clientY-b.top)*144/b.height}}
   cv.addEventListener('mousemove',function(e){var p=toScene(e),s=hit(p.x,p.y);sentence(s?s.name:'')});
   cv.addEventListener('mouseleave',function(){sentence()});
+  var started=false;
   cv.addEventListener('click',function(e){
+    if(!started){started=true;track('game_start');}
     var p=toScene(e),s=hit(p.x,p.y);
     S.dan.tx=Math.max(16,Math.min(304,s?s.x+s.w/2:p.x));
     S.pending=s?function(){act(s)}:null;
@@ -774,6 +778,7 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
     tags.forEach(function(b){b.parentNode.classList.toggle('on',b.dataset.topic===topic);b.setAttribute('aria-pressed',b.dataset.topic===topic)});
   }
   tags.forEach(function(b){b.addEventListener('click',function(){
+    track('topic_filter',{topic:b.textContent});
     if(cur===b.dataset.topic){apply(null);return}
     apply(b.dataset.topic,b.textContent);
     document.getElementById('writing').scrollIntoView({behavior:'smooth'});
@@ -816,7 +821,7 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
     btns[0].textContent='♪ Music: '+(playing?'on':'off');btns[1].textContent='♪ '+(playing?'On':'Off');
     btns.forEach(function(b){b.setAttribute('aria-pressed',playing)});foot.textContent='Sound: '+(playing?'on':'off');
   }
-  function toggle(){if(playing){stop();pref('off')}else{start();pref('on')}}
+  function toggle(){if(playing){stop();pref('off');track('music_toggle',{state:'off'})}else{start();pref('on');track('music_toggle',{state:'on'})}}
   btns.forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();toggle()})});
   var wantMusic=function(){return root.getAttribute('data-mode')==='retro'&&pref()!=='off'};
   // entering game mode (a click, so browsers allow sound) starts the music
@@ -852,6 +857,23 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
 /* ---------- show the CV button only if cv.pdf has been uploaded ---------- */
 fetch('cv.pdf',{method:'HEAD'}).then(function(r){if(r.ok)document.getElementById('cvLink').hidden=false}).catch(function(){});
 
+
+/* ---------- analytics: which sections people reach, Play mode, paper summaries ---------- */
+(function(){
+  if(!('IntersectionObserver' in window))return;
+  var names={game:'Game',about:'Bio',writing:'Writing',teaching:'Teaching',updates:'Updates',contact:'Contact'},seen={};
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var id=e.target.id;
+    if(e.isIntersecting&&!seen[id]&&getComputedStyle(e.target).display!=='none'){seen[id]=1;track('section_view',{section:names[id]||id});io.unobserve(e.target)}
+  })},{rootMargin:'-45% 0px -45% 0px'});
+  Object.keys(names).forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)});
+  document.getElementById('modeSwitch').addEventListener('click',function(){
+    track('mode_switch',{mode:document.documentElement.getAttribute('data-mode')==='retro'?'play':'professional'});
+  });
+  [].forEach.call(document.querySelectorAll('details.pub'),function(d){
+    d.addEventListener('toggle',function(){if(d.open)track('paper_summary_open',{paper:d.querySelector('.t').textContent})});
+  });
+})();
 </script>
 </body>
 </html>
