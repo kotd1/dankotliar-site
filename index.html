@@ -470,7 +470,7 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
     <h2><span class="pro">Updates</span><span class="retro">NEWS.TXT</span></h2>
     <ul class="updates">
       <li class="feature"><time datetime="2026-10-26">26 Oct 2026</time>
-        <div><strong>Chronic Crisis</strong>, an international conference in sociology and anthropology we are convening in Tel Aviv, a day before the national elections, asking what happens to a society when emergency becomes routine. <a href="https://www.mind-il.org/conference/6a303484a90316da446a78bb" target="_blank" rel="noopener">Program and registration</a></div></li>
+        <div><strong>Chronic Crisis</strong>, an international conference in sociology and anthropology we convened in Tel Aviv, a day before the national elections, asking what happens to a society when emergency becomes routine. <a href="https://www.mind-il.org/conference/6a303484a90316da446a78bb" target="_blank" rel="noopener">Conference program</a></div></li>
       <li><time datetime="2025-08">Aug 2025</time>
         <div><a href="https://docs.google.com/forms/d/e/1FAIpQLSeGKzckUcbCzYzJp3pnQRKKGEQAudRc6TvVg61QVWCOOt9FFQ/viewform" target="_blank" rel="noopener">An anti-war petition</a>, signed by faculty and students at the University of Haifa, published in Haaretz.</div></li>
       <li><time datetime="2025-07">Jul 2025</time>
@@ -567,6 +567,9 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
     r(131,56,42,3,'#0B7A6A');
     r(134,59,36,19,'#3A8A3A');
     for(i=0;i<140;i++)r(134+rnd()*34|0,59+rnd()*18|0,3,2,['#2A7A2A','#55AA44','#3F9A3F','#1F661F'][i%4]);
+    // autumn: a soft cloud and some turning leaves
+    r(137,38,10,3,'#F2F2F2');r(139,37,6,1,'#F2F2F2');r(156,40,9,2,'#E6E6EA');
+    for(i=0;i<34;i++)r(134+rnd()*34|0,51+rnd()*26|0,2,2,['#D2691E','#E0A030','#B5541C'][i%3]);
     r(150,36,3,20,'#0B7A6A');
     // wall shelves (left) with metal uprights
     r(8,18,2,64,'#9A9A96');r(50,18,2,64,'#9A9A96');
@@ -585,6 +588,9 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
     r(222,86,30,34,'#B5651D');[94,102,110].forEach(function(dy){r(222,dy,30,1,'#7A3D00')});
     [89,97,105,113].forEach(function(dy){r(235,dy,5,1,'#222')});
     r(224,120,3,2,'#111');r(247,120,3,2,'#111');
+    // a closed umbrella leaning against the desk (autumn)
+    for(i=0;i<22;i++)r(185+(i/6|0),99+i,2,1,'#AA0000');r(186,100,3,8,'#AA0000');r(187,121,1,2,'#333');
+    r(184,96,1,3,'#222');r(185,95,3,1,'#222');r(188,96,1,2,'#222');
     r(196,100,16,22,'#BDBDB8');r(195,99,18,2,'#9A9A96');r(197,97,14,3,'#E6E6E6');r(198,104,1,16,'#A8A8A2');
     // office chair
     r(124,82,20,16,'#262626');r(126,84,16,12,'#333');
@@ -635,6 +641,9 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
     else rect(60,58,30,16,'#1E1E2A');
     // phone light, always blinking
     if((t>>4)%2)rect(39,75,2,1,'#FF5555');
+    // a leaf drifting past the window
+    var lp=(t>>1)%60, lx=136+((lp*0.5+Math.sin(lp/5)*3)|0)%32, ly=37+lp*0.65|0;
+    if(ly<77&&(lx<150||lx>152))rect(lx,ly,2,2,lp%20<10?'#E0A030':'#D2691E');
     // coffee mug
     if(S.mug==='desk'){rect(122,74,7,6,'#FFFFFF');rect(129,75,2,3,'#FFFFFF');rect(123,75,5,1,'#552A00');
       if(!S.drank&&(t>>3)%2){rect(124,70,1,2,'#B0B0B0');rect(127,68,1,3,'#B0B0B0')}}
@@ -676,6 +685,7 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
     {id:'light',name:'ceiling light',x:150,y:2,w:112,h:9},
     {id:'window',name:'window',x:128,y:15,w:48,h:65},
     {id:'board',name:'pin board',x:262,y:26,w:52,h:58},
+    {id:'umbrella',name:'umbrella',x:181,y:93,w:12,h:31},
     {id:'bin',name:'trash bin',x:194,y:96,w:20,h:27},
     {id:'drawers',name:'drawers',x:220,y:85,w:34,h:38},
     {id:'chair',name:'office chair',x:112,y:80,w:38,h:40},
@@ -732,9 +742,10 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
         papers:'Peer reviews, all due yesterday. One reviewer asks, again, about the ethics of it all.',
         pothos:'A pothos with ambitions. It is slowly colonizing the shelves, the desk and possibly the department.',
         light:'Fluorescent, buzzing, and a little overhyped.',
-        window:'Green hills of Mount Carmel and a few passing clouds. Some clouds, you know, hold an entire state.',
-        board:'Postcards, including one that says "Greetings from Silicon Valley", and a flyer: CHRONIC CRISIS · Tel Aviv · 26.10.2026.',
+        window:'Green hills and treetops of Mount Carmel, touched by autumn. Somewhere beyond them, a data center hums.',
+        board:'Postcards, including one that says "Greetings from Silicon Valley".',
         bin:'Rejected drafts. Sorry: "early versions".',
+        umbrella:'A closed umbrella. It\'s autumn in Haifa: the first rain could come any day now.',
         drawers:'Four drawers of institutional memory.',
         chair:'A standard-issue office chair. It has seen many deadlines.',
         desk:'An L-shaped desk, mostly claimed by the pothos.'},
@@ -743,18 +754,19 @@ html[data-mode="retro"] .photo img.ph-retro{display:block;image-rendering:pixela
         books:function(){if(S.book)return 'You already took the useful one.';S.book=true;award('book',5);renderInv();return 'You pull out a dog-eared theory book.'},
         phone:function(){return 'You lift the receiver. '+phoneLines[0]+' You put it down.'},
         pothos:'It has grown into the shelf. It\'s staying.',plants:'They\'re happy on the sill.',
-        figurine:'It stays where it can keep watch.',papers:'You\'ve carried enough peer reviews for one lifetime.',
-        board:'Never take down a conference flyer before the conference.',_:'You can\'t pick that up.'},
+        figurine:'It stays where it can keep watch.',umbrella:'You leave it. It isn\'t raining. Yet.',papers:'You\'ve carried enough peer reviews for one lifetime.',
+        board:'They stay. Every postcard is a field site.',_:'You can\'t pick that up.'},
       use:{
         computer:function(){if(S.on)return R.look.computer;S.on=true;award('on',5);return 'The screen flickers to life: REVISE & RESUBMIT. Reviewer 2 wants "more theory".'},
         chair:'Sit or stand? You hesitate. Who gets to choose?',
+        umbrella:'Opening an umbrella indoors? Reviewer 2 is bad luck enough.',
         light:'The switch is by the door. The lights stay on, like the deadline.',
         phone:function(){return R.talk.phone()},window:function(){return R.open.window},
         drawers:function(){return R.open.drawers},_:'Nothing happens.'},
       open:{
-        window:'It opens a crack. Fresh air from the hills. Lovely, but the deadline doesn\'t care.',
+        window:'It opens a crack. Cool autumn air and the smell of the first rain. Lovely, but the deadline doesn\'t care.',
         drawers:'Old printouts of user clusters, each with a human name scribbled on it. You close it quickly.',
-        computer:'Opening it would void the warranty.',_:'It doesn\'t open.'},
+        computer:'Opening it would void the warranty.',umbrella:'Opening an umbrella indoors? Reviewer 2 is bad luck enough.',_:'It doesn\'t open.'},
       talk:{
         phone:function(){var l=phoneLines[S.talk%phoneLines.length];S.talk++;return l},
         pothos:'The pothos listens politely. So do the billions of microbes in its soil.',
